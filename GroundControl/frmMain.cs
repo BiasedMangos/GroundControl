@@ -27,7 +27,7 @@ namespace GroundControl
         GMapOverlay PathOverlay;
         GMapOverlay PolyOverlay;
 
-        List<PointLatLng> pointsPath;
+        BindingList<PointLatLng> pointsPath;
         List<PointLatLng> pointsPoly;
 
         enum mode { idle, path, poly }
@@ -64,18 +64,19 @@ namespace GroundControl
             gMapMain.Overlays.Add(PolyOverlay);
 
             //initializes lists of points used for paths and polygons
-            pointsPath = new List<PointLatLng>();
+            pointsPath = new BindingList<PointLatLng>();
             pointsPoly = new List<PointLatLng>();
 
-            
+            //dGViewWaypoints.DataSource = pointsPath;
+            //dGViewWaypoints.Columns[0] = 
         }
-
 
 
         private void gMapMain_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
+                //places a makrer on map when mouse is clicked
                 //GMarkerGoogle newMarker = new GMarkerGoogle(gMapMain.FromLocalToLatLng(e.X, e.Y), GMarkerGoogleType.green);
                 //markerOverlay.Markers.Add(newMarker);
 
@@ -98,11 +99,22 @@ namespace GroundControl
         }
         private void gMapMain_MouseMove(object sender, MouseEventArgs e)
         {
+            //updates status bar with current lat long coordinates of mouse position
             statLat.Text = string.Format("Lat: {000}", gMapMain.FromLocalToLatLng(e.X, e.Y).Lat);
             statLng.Text = string.Format("Long: {000}", gMapMain.FromLocalToLatLng(e.X, e.Y).Lng);
         }
 
-
+        private void updateTable()
+        {
+            dGViewWaypoints.Rows.Add(1);
+            for (int i = 0; i < pointsPath.Count; i++)
+            {
+                
+                dGViewWaypoints.Rows[i].Cells[0].Value = (i + 1).ToString();
+                dGViewWaypoints.Rows[i].Cells[1].Value = pointsPath[i].Lat.ToString();
+                dGViewWaypoints.Rows[i].Cells[2].Value = pointsPath[i].Lng.ToString();
+            }
+        }
 
         private void addPointToPath(PointLatLng point)
         {
@@ -112,7 +124,6 @@ namespace GroundControl
             PathOverlay.Clear();
             PathOverlay.Routes.Add(path);
 
-            
             if (pointsPath.Count == 1)
             {
                 //adds a marker to the begginging of the path
@@ -126,27 +137,7 @@ namespace GroundControl
                 GMarkerGoogle newMarker = new GMarkerGoogle(pointsPath[pointsPath.Count - 2],GMarkerGoogleType.gray_small);
                 MarkerOverlay.Markers.Add(newMarker);
             }
-
-        }
-
-
-        private void btnPathBegin_Click(object sender, EventArgs e)
-        {
-            beginPath();
-        }
-        private void btnPathEnd_Click(object sender, EventArgs e)
-        {
-            endPath();
-            //adds marker to end of path
-            GMarkerGoogle newMarker = new GMarkerGoogle(pointsPath.Last<PointLatLng>(), GMarkerGoogleType.red);
-            MarkerOverlay.Markers.Add(newMarker);
-        }
-        private void btnPathClear_Click(object sender, EventArgs e)
-        {
-            endPath();
-            PathOverlay.Clear();
-            pointsPath.Clear();
-            MarkerOverlay.Clear();
+            updateTable();
         }
         private void beginPath()
         {
@@ -170,6 +161,24 @@ namespace GroundControl
             txbxLngPath.Enabled = false;
             btnAddPathPoint.Enabled = false;
         }
+        private void btnPathBegin_Click(object sender, EventArgs e)
+        {
+            beginPath();
+        }
+        private void btnPathEnd_Click(object sender, EventArgs e)
+        {
+            endPath();
+            //adds marker to end of path
+            GMarkerGoogle newMarker = new GMarkerGoogle(pointsPath.Last<PointLatLng>(), GMarkerGoogleType.red);
+            MarkerOverlay.Markers.Add(newMarker);
+        }
+        private void btnPathClear_Click(object sender, EventArgs e)
+        {
+            endPath();
+            PathOverlay.Clear();
+            pointsPath.Clear();
+            MarkerOverlay.Clear();
+        }
         private void btnAddPathPoint_Click(object sender, EventArgs e)
         {
             try
@@ -189,22 +198,6 @@ namespace GroundControl
             GMapPolygon poly = new GMapPolygon(pointsPoly, "Poly");
             PolyOverlay.Clear();
             PolyOverlay.Polygons.Add(poly);
-        }
-        private void btnPolyBegin_Click(object sender, EventArgs e)
-        {
-            beginPoly();
-        }
-
-        private void btnPolyEnd_Click(object sender, EventArgs e)
-        {
-            endPoly();
-        }
-
-        private void btnPolyClear_Click(object sender, EventArgs e)
-        {
-            endPoly();
-            PolyOverlay.Clear();
-            pointsPoly.Clear();
         }
         private void beginPoly()
         {
@@ -228,9 +221,30 @@ namespace GroundControl
             txbxLngPoly.Enabled = false;
             btnAddPolyPoint.Enabled = false;
         }
-
+        private void btnPolyBegin_Click(object sender, EventArgs e)
+        {
+            beginPoly();
+        }
+        private void btnPolyEnd_Click(object sender, EventArgs e)
+        {
+            endPoly();
+        }
+        private void btnPolyClear_Click(object sender, EventArgs e)
+        {
+            endPoly();
+            PolyOverlay.Clear();
+            pointsPoly.Clear();
+        }
         private void btnAddPolyPoint_Click(object sender, EventArgs e)
         {
+            try
+            {
+                addPointToPoly(new PointLatLng(Convert.ToDouble(txbxLatPoly.Text), Convert.ToDouble(txbxLngPoly.Text)));
+            }
+            catch
+            {
+                MessageBox.Show("Enter Valid Coordinates");
+            }
 
         }
 

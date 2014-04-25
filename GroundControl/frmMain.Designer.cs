@@ -28,19 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.gMapMain = new GMap.NET.WindowsForms.GMapControl();
             this.trBarZoom = new System.Windows.Forms.TrackBar();
             this.grBxPath = new System.Windows.Forms.GroupBox();
+            this.btnAddPathPoint = new System.Windows.Forms.Button();
+            this.lblLLngPath = new System.Windows.Forms.Label();
+            this.lblLatPath = new System.Windows.Forms.Label();
+            this.txbxLngPath = new System.Windows.Forms.TextBox();
+            this.txbxLatPath = new System.Windows.Forms.TextBox();
+            this.btnPathClear = new System.Windows.Forms.Button();
             this.btnPathEnd = new System.Windows.Forms.Button();
             this.btnPathBegin = new System.Windows.Forms.Button();
             this.grBxTopRight = new System.Windows.Forms.GroupBox();
             this.grBxPoints = new System.Windows.Forms.GroupBox();
             this.dGViewWaypoints = new System.Windows.Forms.DataGridView();
-            this.WaypointNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Longditude = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grBxPolygon = new System.Windows.Forms.GroupBox();
+            this.btnAddPolyPoint = new System.Windows.Forms.Button();
+            this.btnPolyBegin = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnPolyEnd = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnPolyClear = new System.Windows.Forms.Button();
+            this.txbxLngPoly = new System.Windows.Forms.TextBox();
+            this.txbxLatPoly = new System.Windows.Forms.TextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,20 +64,10 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statLat = new System.Windows.Forms.ToolStripStatusLabel();
             this.statLng = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnPathClear = new System.Windows.Forms.Button();
-            this.txbxLatPath = new System.Windows.Forms.TextBox();
-            this.txbxLngPath = new System.Windows.Forms.TextBox();
-            this.lblLatPath = new System.Windows.Forms.Label();
-            this.lblLLngPath = new System.Windows.Forms.Label();
-            this.btnAddPathPoint = new System.Windows.Forms.Button();
-            this.btnAddPolyPoint = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txbxLngPoly = new System.Windows.Forms.TextBox();
-            this.txbxLatPoly = new System.Windows.Forms.TextBox();
-            this.btnPolyClear = new System.Windows.Forms.Button();
-            this.btnPolyEnd = new System.Windows.Forms.Button();
-            this.btnPolyBegin = new System.Windows.Forms.Button();
+            this.frmMainBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.WaypointNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lng = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).BeginInit();
             this.grBxPath.SuspendLayout();
@@ -74,6 +76,7 @@
             this.grBxPolygon.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.frmMainBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -164,6 +167,61 @@
             this.grBxPath.TabStop = false;
             this.grBxPath.Text = "Flight Path";
             // 
+            // btnAddPathPoint
+            // 
+            this.btnAddPathPoint.Enabled = false;
+            this.btnAddPathPoint.Location = new System.Drawing.Point(6, 87);
+            this.btnAddPathPoint.Name = "btnAddPathPoint";
+            this.btnAddPathPoint.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPathPoint.TabIndex = 7;
+            this.btnAddPathPoint.Text = "Add Point";
+            this.btnAddPathPoint.UseVisualStyleBackColor = true;
+            this.btnAddPathPoint.Click += new System.EventHandler(this.btnAddPathPoint_Click);
+            // 
+            // lblLLngPath
+            // 
+            this.lblLLngPath.AutoSize = true;
+            this.lblLLngPath.Location = new System.Drawing.Point(109, 45);
+            this.lblLLngPath.Name = "lblLLngPath";
+            this.lblLLngPath.Size = new System.Drawing.Size(34, 13);
+            this.lblLLngPath.TabIndex = 6;
+            this.lblLLngPath.Text = "Long:";
+            // 
+            // lblLatPath
+            // 
+            this.lblLatPath.AutoSize = true;
+            this.lblLatPath.Location = new System.Drawing.Point(6, 45);
+            this.lblLatPath.Name = "lblLatPath";
+            this.lblLatPath.Size = new System.Drawing.Size(25, 13);
+            this.lblLatPath.TabIndex = 5;
+            this.lblLatPath.Text = "Lat:";
+            // 
+            // txbxLngPath
+            // 
+            this.txbxLngPath.Enabled = false;
+            this.txbxLngPath.Location = new System.Drawing.Point(112, 61);
+            this.txbxLngPath.Name = "txbxLngPath";
+            this.txbxLngPath.Size = new System.Drawing.Size(100, 20);
+            this.txbxLngPath.TabIndex = 4;
+            // 
+            // txbxLatPath
+            // 
+            this.txbxLatPath.Enabled = false;
+            this.txbxLatPath.Location = new System.Drawing.Point(6, 61);
+            this.txbxLatPath.Name = "txbxLatPath";
+            this.txbxLatPath.Size = new System.Drawing.Size(100, 20);
+            this.txbxLatPath.TabIndex = 3;
+            // 
+            // btnPathClear
+            // 
+            this.btnPathClear.Location = new System.Drawing.Point(166, 19);
+            this.btnPathClear.Name = "btnPathClear";
+            this.btnPathClear.Size = new System.Drawing.Size(75, 23);
+            this.btnPathClear.TabIndex = 2;
+            this.btnPathClear.Text = "Clear Path";
+            this.btnPathClear.UseVisualStyleBackColor = true;
+            this.btnPathClear.Click += new System.EventHandler(this.btnPathClear_Click);
+            // 
             // btnPathEnd
             // 
             this.btnPathEnd.Enabled = false;
@@ -213,8 +271,8 @@
             this.dGViewWaypoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGViewWaypoints.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.WaypointNumber,
-            this.Latitude,
-            this.Longditude});
+            this.Lat,
+            this.Lng});
             this.dGViewWaypoints.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dGViewWaypoints.Location = new System.Drawing.Point(3, 16);
             this.dGViewWaypoints.Name = "dGViewWaypoints";
@@ -223,33 +281,6 @@
             this.dGViewWaypoints.RowHeadersVisible = false;
             this.dGViewWaypoints.Size = new System.Drawing.Size(238, 165);
             this.dGViewWaypoints.TabIndex = 0;
-            // 
-            // WaypointNumber
-            // 
-            this.WaypointNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.WaypointNumber.HeaderText = "No.";
-            this.WaypointNumber.Name = "WaypointNumber";
-            this.WaypointNumber.ReadOnly = true;
-            this.WaypointNumber.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.WaypointNumber.Width = 49;
-            // 
-            // Latitude
-            // 
-            this.Latitude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Latitude.HeaderText = "Lat";
-            this.Latitude.Name = "Latitude";
-            this.Latitude.ReadOnly = true;
-            this.Latitude.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Latitude.Width = 47;
-            // 
-            // Longditude
-            // 
-            this.Longditude.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Longditude.HeaderText = "long";
-            this.Longditude.Name = "Longditude";
-            this.Longditude.ReadOnly = true;
-            this.Longditude.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Longditude.Width = 52;
             // 
             // grBxPolygon
             // 
@@ -268,6 +299,82 @@
             this.grBxPolygon.TabIndex = 5;
             this.grBxPolygon.TabStop = false;
             this.grBxPolygon.Text = "Survey Polygon";
+            // 
+            // btnAddPolyPoint
+            // 
+            this.btnAddPolyPoint.Enabled = false;
+            this.btnAddPolyPoint.Location = new System.Drawing.Point(6, 87);
+            this.btnAddPolyPoint.Name = "btnAddPolyPoint";
+            this.btnAddPolyPoint.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPolyPoint.TabIndex = 15;
+            this.btnAddPolyPoint.Text = "Add Point";
+            this.btnAddPolyPoint.UseVisualStyleBackColor = true;
+            this.btnAddPolyPoint.Click += new System.EventHandler(this.btnAddPolyPoint_Click);
+            // 
+            // btnPolyBegin
+            // 
+            this.btnPolyBegin.Location = new System.Drawing.Point(6, 19);
+            this.btnPolyBegin.Name = "btnPolyBegin";
+            this.btnPolyBegin.Size = new System.Drawing.Size(75, 23);
+            this.btnPolyBegin.TabIndex = 8;
+            this.btnPolyBegin.Text = "Begin Poly";
+            this.btnPolyBegin.UseVisualStyleBackColor = true;
+            this.btnPolyBegin.Click += new System.EventHandler(this.btnPolyBegin_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(109, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Long:";
+            // 
+            // btnPolyEnd
+            // 
+            this.btnPolyEnd.Enabled = false;
+            this.btnPolyEnd.Location = new System.Drawing.Point(86, 19);
+            this.btnPolyEnd.Name = "btnPolyEnd";
+            this.btnPolyEnd.Size = new System.Drawing.Size(75, 23);
+            this.btnPolyEnd.TabIndex = 9;
+            this.btnPolyEnd.Text = "End Poly";
+            this.btnPolyEnd.UseVisualStyleBackColor = true;
+            this.btnPolyEnd.Click += new System.EventHandler(this.btnPolyEnd_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(25, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Lat:";
+            // 
+            // btnPolyClear
+            // 
+            this.btnPolyClear.Location = new System.Drawing.Point(166, 19);
+            this.btnPolyClear.Name = "btnPolyClear";
+            this.btnPolyClear.Size = new System.Drawing.Size(75, 23);
+            this.btnPolyClear.TabIndex = 10;
+            this.btnPolyClear.Text = "Clear Poly";
+            this.btnPolyClear.UseVisualStyleBackColor = true;
+            this.btnPolyClear.Click += new System.EventHandler(this.btnPolyClear_Click);
+            // 
+            // txbxLngPoly
+            // 
+            this.txbxLngPoly.Enabled = false;
+            this.txbxLngPoly.Location = new System.Drawing.Point(112, 61);
+            this.txbxLngPoly.Name = "txbxLngPoly";
+            this.txbxLngPoly.Size = new System.Drawing.Size(100, 20);
+            this.txbxLngPoly.TabIndex = 12;
+            // 
+            // txbxLatPoly
+            // 
+            this.txbxLatPoly.Enabled = false;
+            this.txbxLatPoly.Location = new System.Drawing.Point(6, 61);
+            this.txbxLatPoly.Name = "txbxLatPoly";
+            this.txbxLatPoly.Size = new System.Drawing.Size(100, 20);
+            this.txbxLatPoly.TabIndex = 11;
             // 
             // menuStrip
             // 
@@ -351,136 +458,32 @@
             this.statLng.Size = new System.Drawing.Size(37, 17);
             this.statLng.Text = "Long:";
             // 
-            // btnPathClear
+            // frmMainBindingSource
             // 
-            this.btnPathClear.Location = new System.Drawing.Point(166, 19);
-            this.btnPathClear.Name = "btnPathClear";
-            this.btnPathClear.Size = new System.Drawing.Size(75, 23);
-            this.btnPathClear.TabIndex = 2;
-            this.btnPathClear.Text = "Clear Path";
-            this.btnPathClear.UseVisualStyleBackColor = true;
-            this.btnPathClear.Click += new System.EventHandler(this.btnPathClear_Click);
+            this.frmMainBindingSource.DataSource = typeof(GroundControl.frmMain);
             // 
-            // txbxLatPath
+            // WaypointNumber
             // 
-            this.txbxLatPath.Enabled = false;
-            this.txbxLatPath.Location = new System.Drawing.Point(6, 61);
-            this.txbxLatPath.Name = "txbxLatPath";
-            this.txbxLatPath.Size = new System.Drawing.Size(100, 20);
-            this.txbxLatPath.TabIndex = 3;
+            this.WaypointNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.WaypointNumber.HeaderText = "No.";
+            this.WaypointNumber.Name = "WaypointNumber";
+            this.WaypointNumber.ReadOnly = true;
+            this.WaypointNumber.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.WaypointNumber.Width = 49;
             // 
-            // txbxLngPath
+            // Lat
             // 
-            this.txbxLngPath.Enabled = false;
-            this.txbxLngPath.Location = new System.Drawing.Point(112, 61);
-            this.txbxLngPath.Name = "txbxLngPath";
-            this.txbxLngPath.Size = new System.Drawing.Size(100, 20);
-            this.txbxLngPath.TabIndex = 4;
+            this.Lat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Lat.HeaderText = "Lat";
+            this.Lat.Name = "Lat";
+            this.Lat.ReadOnly = true;
             // 
-            // lblLatPath
+            // Lng
             // 
-            this.lblLatPath.AutoSize = true;
-            this.lblLatPath.Location = new System.Drawing.Point(6, 45);
-            this.lblLatPath.Name = "lblLatPath";
-            this.lblLatPath.Size = new System.Drawing.Size(25, 13);
-            this.lblLatPath.TabIndex = 5;
-            this.lblLatPath.Text = "Lat:";
-            // 
-            // lblLLngPath
-            // 
-            this.lblLLngPath.AutoSize = true;
-            this.lblLLngPath.Location = new System.Drawing.Point(109, 45);
-            this.lblLLngPath.Name = "lblLLngPath";
-            this.lblLLngPath.Size = new System.Drawing.Size(34, 13);
-            this.lblLLngPath.TabIndex = 6;
-            this.lblLLngPath.Text = "Long:";
-            // 
-            // btnAddPathPoint
-            // 
-            this.btnAddPathPoint.Enabled = false;
-            this.btnAddPathPoint.Location = new System.Drawing.Point(6, 87);
-            this.btnAddPathPoint.Name = "btnAddPathPoint";
-            this.btnAddPathPoint.Size = new System.Drawing.Size(75, 23);
-            this.btnAddPathPoint.TabIndex = 7;
-            this.btnAddPathPoint.Text = "Add Point";
-            this.btnAddPathPoint.UseVisualStyleBackColor = true;
-            this.btnAddPathPoint.Click += new System.EventHandler(this.btnAddPathPoint_Click);
-            // 
-            // btnAddPolyPoint
-            // 
-            this.btnAddPolyPoint.Enabled = false;
-            this.btnAddPolyPoint.Location = new System.Drawing.Point(6, 87);
-            this.btnAddPolyPoint.Name = "btnAddPolyPoint";
-            this.btnAddPolyPoint.Size = new System.Drawing.Size(75, 23);
-            this.btnAddPolyPoint.TabIndex = 15;
-            this.btnAddPolyPoint.Text = "Add Point";
-            this.btnAddPolyPoint.UseVisualStyleBackColor = true;
-            this.btnAddPolyPoint.Click += new System.EventHandler(this.btnAddPolyPoint_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(109, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Long:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(25, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Lat:";
-            // 
-            // txbxLngPoly
-            // 
-            this.txbxLngPoly.Enabled = false;
-            this.txbxLngPoly.Location = new System.Drawing.Point(112, 61);
-            this.txbxLngPoly.Name = "txbxLngPoly";
-            this.txbxLngPoly.Size = new System.Drawing.Size(100, 20);
-            this.txbxLngPoly.TabIndex = 12;
-            // 
-            // txbxLatPoly
-            // 
-            this.txbxLatPoly.Enabled = false;
-            this.txbxLatPoly.Location = new System.Drawing.Point(6, 61);
-            this.txbxLatPoly.Name = "txbxLatPoly";
-            this.txbxLatPoly.Size = new System.Drawing.Size(100, 20);
-            this.txbxLatPoly.TabIndex = 11;
-            // 
-            // btnPolyClear
-            // 
-            this.btnPolyClear.Location = new System.Drawing.Point(166, 19);
-            this.btnPolyClear.Name = "btnPolyClear";
-            this.btnPolyClear.Size = new System.Drawing.Size(75, 23);
-            this.btnPolyClear.TabIndex = 10;
-            this.btnPolyClear.Text = "Clear Poly";
-            this.btnPolyClear.UseVisualStyleBackColor = true;
-            this.btnPolyClear.Click += new System.EventHandler(this.btnPolyClear_Click);
-            // 
-            // btnPolyEnd
-            // 
-            this.btnPolyEnd.Enabled = false;
-            this.btnPolyEnd.Location = new System.Drawing.Point(86, 19);
-            this.btnPolyEnd.Name = "btnPolyEnd";
-            this.btnPolyEnd.Size = new System.Drawing.Size(75, 23);
-            this.btnPolyEnd.TabIndex = 9;
-            this.btnPolyEnd.Text = "End Poly";
-            this.btnPolyEnd.UseVisualStyleBackColor = true;
-            this.btnPolyEnd.Click += new System.EventHandler(this.btnPolyEnd_Click);
-            // 
-            // btnPolyBegin
-            // 
-            this.btnPolyBegin.Location = new System.Drawing.Point(6, 19);
-            this.btnPolyBegin.Name = "btnPolyBegin";
-            this.btnPolyBegin.Size = new System.Drawing.Size(75, 23);
-            this.btnPolyBegin.TabIndex = 8;
-            this.btnPolyBegin.Text = "Begin Poly";
-            this.btnPolyBegin.UseVisualStyleBackColor = true;
-            this.btnPolyBegin.Click += new System.EventHandler(this.btnPolyBegin_Click);
+            this.Lng.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Lng.HeaderText = "Long";
+            this.Lng.Name = "Lng";
+            this.Lng.ReadOnly = true;
             // 
             // frmMain
             // 
@@ -508,6 +511,7 @@
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.frmMainBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -534,9 +538,6 @@
         private System.Windows.Forms.GroupBox grBxPolygon;
         private System.Windows.Forms.GroupBox grBxPoints;
         private System.Windows.Forms.DataGridView dGViewWaypoints;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WaypointNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Latitude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Longditude;
         private System.Windows.Forms.Button btnPathEnd;
         private System.Windows.Forms.Button btnPathBegin;
         private System.Windows.Forms.Button btnPathClear;
@@ -553,6 +554,10 @@
         private System.Windows.Forms.Button btnPolyClear;
         private System.Windows.Forms.TextBox txbxLngPoly;
         private System.Windows.Forms.TextBox txbxLatPoly;
+        private System.Windows.Forms.BindingSource frmMainBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WaypointNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Lat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Lng;
 
 
 
