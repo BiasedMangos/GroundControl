@@ -23,11 +23,13 @@ namespace GroundControl
         int iMinZoom = 3;
         int iStartZoom = 13;
 
+        FlightPath FlightPath;
+
         GMapOverlay MarkerOverlay;
         GMapOverlay PathOverlay;
         GMapOverlay PolyOverlay;
 
-        BindingList<PointLatLng> pointsPath;
+        List<PointLatLng> pointsPath;
         List<PointLatLng> pointsPoly;
 
         enum mode { idle, path, poly }
@@ -38,6 +40,8 @@ namespace GroundControl
             InitializeComponent();
 
             drawingMode = mode.idle;
+
+            FlightPath = new FlightPath();
 
             //sets which server the Control will get its map from and what mode it will be in
             gMapMain.MapProvider = GMapProviders.GoogleSatelliteMap;
@@ -64,11 +68,8 @@ namespace GroundControl
             gMapMain.Overlays.Add(PolyOverlay);
 
             //initializes lists of points used for paths and polygons
-            pointsPath = new BindingList<PointLatLng>();
-            pointsPoly = new List<PointLatLng>();
-
-            //dGViewWaypoints.DataSource = pointsPath;
-            //dGViewWaypoints.Columns[0] = 
+            pointsPath = new List<PointLatLng>();
+            pointsPoly = new List<PointLatLng>(); 
         }
 
 
@@ -86,7 +87,6 @@ namespace GroundControl
                 switch (drawingMode)
                 {
                     case mode.idle:
-
                         break;
                     case mode.path:
                         addPointToPath(newPoint);
@@ -106,10 +106,10 @@ namespace GroundControl
 
         private void updateTable()
         {
+            //displays waypoint coordinates for flight path in table
             dGViewWaypoints.Rows.Add(1);
             for (int i = 0; i < pointsPath.Count; i++)
             {
-                
                 dGViewWaypoints.Rows[i].Cells[0].Value = (i + 1).ToString();
                 dGViewWaypoints.Rows[i].Cells[1].Value = pointsPath[i].Lat.ToString();
                 dGViewWaypoints.Rows[i].Cells[2].Value = pointsPath[i].Lng.ToString();
@@ -119,7 +119,6 @@ namespace GroundControl
         private void addPointToPath(PointLatLng point)
         {
             pointsPath.Add(point);
-
             GMapRoute path = new GMapRoute(pointsPath, "Path");
             PathOverlay.Clear();
             PathOverlay.Routes.Add(path);
@@ -169,8 +168,11 @@ namespace GroundControl
         {
             endPath();
             //adds marker to end of path
-            GMarkerGoogle newMarker = new GMarkerGoogle(pointsPath.Last<PointLatLng>(), GMarkerGoogleType.red);
-            MarkerOverlay.Markers.Add(newMarker);
+            if (pointsPath.Count > 0)
+            {
+                GMarkerGoogle newMarker = new GMarkerGoogle(pointsPath.Last<PointLatLng>(), GMarkerGoogleType.red);
+                MarkerOverlay.Markers.Add(newMarker);
+            }
         }
         private void btnPathClear_Click(object sender, EventArgs e)
         {
@@ -178,6 +180,7 @@ namespace GroundControl
             PathOverlay.Clear();
             pointsPath.Clear();
             MarkerOverlay.Clear();
+            dGViewWaypoints.Rows.Clear();
         }
         private void btnAddPathPoint_Click(object sender, EventArgs e)
         {
@@ -245,7 +248,18 @@ namespace GroundControl
             {
                 MessageBox.Show("Enter Valid Coordinates");
             }
+        }
 
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = "Save Text File";
+            dialog.Filter = "TXT files|*.txt";
+            dialog.InitialDirectory = @"C:\";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                FlightPath.ExportToText(pointsPath, dialog.FileName.ToString());
+            }
         }
 
         //handles pan, zoom, and all other options related to displaying map
@@ -262,7 +276,6 @@ namespace GroundControl
         }
 
         #endregion
-
 
 
     }
