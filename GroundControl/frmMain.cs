@@ -24,6 +24,7 @@ namespace GroundControl
         int iStartZoom = 13;
 
         FlightPath FlightPath;
+        Geometry Geometry;
 
         GMapOverlay MarkerOverlay;
         GMapOverlay PathOverlay;
@@ -42,6 +43,7 @@ namespace GroundControl
             drawingMode = mode.idle;
 
             FlightPath = new FlightPath();
+            Geometry = new Geometry();
 
             //sets which server the Control will get its map from and what mode it will be in
             gMapMain.MapProvider = GMapProviders.GoogleSatelliteMap;
@@ -223,6 +225,10 @@ namespace GroundControl
             txbxLatPoly.Enabled = false;
             txbxLngPoly.Enabled = false;
             btnAddPolyPoint.Enabled = false;
+
+            //REVERSE POLYGON NEEDS TO GO HERE, WRITE A NEW FUNCTION FOR IT +_______________________________________________________________________________)_)(+)_(_)(+_)(+_)+_(+_)(+_)
+
+            
         }
         private void btnPolyBegin_Click(object sender, EventArgs e)
         {
