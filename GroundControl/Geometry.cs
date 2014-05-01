@@ -22,11 +22,14 @@ namespace GroundControl
             double deltaY12 = p2y - p1y;
             double dSlope12 = Math.Atan2(deltaY12, deltaX12);
 
-            double deltaX23 = p2x - p1x;
-            double deltaY23 = p2y - p1y;
+            double deltaX23 = p3x - p2x;
+            double deltaY23 = p3y - p2y;
             double dSlope23 = Math.Atan2(deltaY23, deltaX23);
 
-            return dSlope23 - dSlope12;
+            // Zone the angles
+            if (dSlope12 < 0) dSlope12 += 2*Math.PI;
+            if (dSlope23 < 0) dSlope23 += 2 * Math.PI;
+            return Math.PI - (dSlope23 - dSlope12);
         }
 
         public List<PointLatLng> ConvexHull(List<PointLatLng> lPoints)
@@ -49,6 +52,7 @@ namespace GroundControl
                 {
                     lPoints.RemoveAt(i + 1);
                     i -= 2;
+                    if (i < 0) i = 0;
                 }
             }
             return lPoints;

@@ -228,7 +228,6 @@ namespace GroundControl
 
             //REVERSE POLYGON NEEDS TO GO HERE, WRITE A NEW FUNCTION FOR IT +_______________________________________________________________________________)_)(+)_(_)(+_)(+_)+_(+_)(+_)
 
-            
         }
         private void btnPolyBegin_Click(object sender, EventArgs e)
         {
@@ -237,6 +236,10 @@ namespace GroundControl
         private void btnPolyEnd_Click(object sender, EventArgs e)
         {
             endPoly();
+            Geometry.ConvexHull(pointsPoly);
+            GMapPolygon poly = new GMapPolygon(pointsPoly, "Poly");
+            PolyOverlay.Clear();
+            PolyOverlay.Polygons.Add(poly);
         }
         private void btnPolyClear_Click(object sender, EventArgs e)
         {
