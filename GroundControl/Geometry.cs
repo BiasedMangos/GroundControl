@@ -13,6 +13,11 @@ namespace GroundControl
 {
     class Geometry
     {
+        public double ccw(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y)
+        {
+            return (p2x - p1x) * (p3y - p1y) - (p2y - p1y) * (p3x - p1x);
+        }
+
         public double GetAngle(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y)
         {
             //finds the angle between 3 points by finding the slope of each set of 2 points
@@ -40,21 +45,41 @@ namespace GroundControl
 
             int iDirectionTest;
             iDirectionTest = (CalculateArea(lPoints) > 0 ? 1 :  -1);
+            double dCcw;
+            bool bDone;
 
-            double dAngle;
+            int iLoopCount = 0;
 
-            for (int i = 0; i < lPoints.Count - 2; i++)
+            do
             {
-                dAngle = GetAngle(lPoints[i].Lng, lPoints[i].Lat, 
-                                  lPoints[i + 1].Lng, lPoints[i + 1].Lat, 
-                                  lPoints[i + 2].Lng, lPoints[i + 2].Lat);
-                if (dAngle > Math.PI)
+                
+                bDone = true;
+                for (int i = 0; i < lPoints.Count; i++)
                 {
-                    lPoints.RemoveAt(i + 1);
-                    i -= 2;
-                    if (i < 0) i = 0;
+                    int i1 = i;
+                    int i2 = (i + 1) % lPoints.Count;
+                    int i3 = (i + 2) % lPoints.Count;
+                    dCcw = ccw(lPoints[i1].Lng, lPoints[i1].Lat, lPoints[i2].Lng, lPoints[i2].Lat, lPoints[i3].Lng, lPoints[i3].Lat);
+                    if (dCcw < 0)
+                    {
+                        if (!LineIntersectPoly(lPoints, lPoints[i1], lPoints[i3]))
+                        {
+                            lPoints.RemoveAt(i2);
+                            i -= 2;
+                            if (i < 0) i = 0;
+                        }
+                        else
+                            bDone = false; 
+                    }
                 }
-            }
+            } while (!bDone && ++iLoopCount <4);
+
+            /*dCcw = ccw(lPoints[lPoints.Count - 2].Lng, lPoints[lPoints.Count - 2].Lat, lPoints[lPoints.Count - 1].Lng, lPoints[lPoints.Count - 1].Lat, lPoints[0].Lng, lPoints[0].Lat);
+            if (dCcw < 0)   lPoints.RemoveAt(lPoints.Count - 1);
+
+            dCcw = ccw(lPoints[lPoints.Count - 1].Lng, lPoints[lPoints.Count - 1].Lat, lPoints[0].Lng, lPoints[0].Lat, lPoints[1].Lng, lPoints[1].Lat);
+            if (dCcw < 0) lPoints.RemoveAt(0);
+            */
             return lPoints;
         }
 
@@ -77,8 +102,69 @@ namespace GroundControl
                 //its magnitude also happens represents the area of the parallelogram enclosed by the vectors
                 dArea += v1x * v2y - v1y * v2x;
             }
-
             return dArea/2;
+        }
+
+
+        bool PointOnLine(PointLatLng pointP, PointLatLng pointL1, PointLatLng pointL2)
+        {
+            double dFudge = 0.000001;       // This is used to avoid rounding errors causing false positives
+            double dLngMax = Math.Max(pointL1.Lng, pointL2.Lng) - dFudge;
+            double dLngMin = Math.Min(pointL1.Lng, pointL2.Lng) + dFudge;
+            double dLatMax = Math.Max(pointL1.Lat, pointL2.Lat) - dFudge;
+            double dLatMin = Math.Min(pointL1.Lat, pointL2.Lat) + dFudge;
+            if (dLngMin < pointP.Lng && pointP.Lng < dLngMax && 
+                dLatMin < pointP.Lat && pointP.Lat < dLatMax) return true;
+    	    return(false);
+        }
+
+
+        int LineIntersect(PointLatLng point11, PointLatLng point12, PointLatLng point21, PointLatLng point22, ref PointLatLng pointInt)
+        {
+            double a1, b1, c1, a2, b2, c2;
+            double d;
+            bool bInside1, bInside2;
+
+            /* CALC. LINE 1 COEpointpointS. */
+            a1 = point12.Lat - point11.Lat;
+            b1 = point11.Lng - point12.Lng;
+            c1 = (point12.Lng * point11.Lat) -
+                 (point11.Lng * point12.Lat);
+            /* CALC. LINE 2 COEpointpointS. */
+            a2 = point22.Lat - point21.Lat;
+            b2 = point21.Lng - point22.Lng;
+            c2 = ((double)point22.Lng * (double)point21.Lat) -
+                 ((double)point21.Lng * (double)point22.Lat);
+
+            /* CALC. SLOPE pointACTOR AND TEST pointOR PARALLEL LINES */
+            d = (a1 * b2 - a2 * b1);
+            if (d == 0.0) return (0);
+
+            /* CALC. INTERSECTION */
+            pointInt.Lng = ((b1 * c2 - b2 * c1) / d);
+            pointInt.Lat = ((a2 * c1 - a1 * c2) / d);
+
+            /* TEST pointOR INTERSECTION TYPE */
+            bInside1 = PointOnLine(pointInt, point11, point12);
+            bInside2 = PointOnLine(pointInt, point21, point22);
+
+            if (bInside1 && bInside2)
+                bInside1 = bInside1;
+
+            return (1 + (bInside1 ? 1 : 0) + (bInside2 ? 2 : 0));
+        }
+
+        bool LineIntersectPoly(List<PointLatLng> lPoints, PointLatLng point1, PointLatLng point2)
+        {
+            PointLatLng pointInt = new PointLatLng();
+            for (int i = 0; i < lPoints.Count; i++)
+            {
+                int i1 = i;
+                int i2 = (i + 1) % lPoints.Count;
+                if (LineIntersect(lPoints[i1], lPoints[i2], point1, point2, ref pointInt) == 4)
+                    return true;
+            }
+            return false;
         }
     }
 }
