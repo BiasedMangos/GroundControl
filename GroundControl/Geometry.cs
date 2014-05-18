@@ -42,9 +42,11 @@ namespace GroundControl
             //any polygons drawn willautomatically be edited so that they progress in an anticlockwise direction
             //otherwise this convex hull function would be measuring the outside angles
             //and this would cause it to remove all the wrong points.
+            if (CalculateArea(lPoints) < 0)
+            {
+                ReverseList(ref lPoints);
+            }
 
-            int iDirectionTest;
-            iDirectionTest = (CalculateArea(lPoints) > 0 ? 1 :  -1);
             double dCcw;
             bool bDone;
 
@@ -81,6 +83,16 @@ namespace GroundControl
             if (dCcw < 0) lPoints.RemoveAt(0);
             */
             return lPoints;
+        }
+        public void ReverseList(ref List<PointLatLng> lPoints)
+        {
+            PointLatLng pTemp;
+            for (int i = 0, j = lPoints.Count - 1; i < (lPoints.Count/2); i++, j--)
+            {
+                pTemp = lPoints[i];
+                lPoints[i] = lPoints[j];
+                lPoints[j] = pTemp;
+            }
         }
 
         public double CalculateArea(List<PointLatLng> lPoints)
