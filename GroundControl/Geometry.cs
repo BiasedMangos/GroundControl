@@ -89,6 +89,7 @@ namespace GroundControl
             PointLatLng pTemp;
             for (int i = 0, j = lPoints.Count - 1; i < (lPoints.Count/2); i++, j--)
             {
+                //loops through half list swapping 1st and last, then 2nd and 2nd last etc.
                 pTemp = lPoints[i];
                 lPoints[i] = lPoints[j];
                 lPoints[j] = pTemp;
