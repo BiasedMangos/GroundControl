@@ -111,7 +111,8 @@ namespace GroundControl
         private void updateTable()
         {
             //displays waypoint coordinates for flight path in table
-            dGViewWaypoints.Rows.Add(1);
+            int iNoOfRows = lPointsPath.Count - dGViewWaypoints.Rows.Count;
+            dGViewWaypoints.Rows.Add(iNoOfRows);
             for (int i = 0; i < lPointsPath.Count; i++)
             {
                 dGViewWaypoints.Rows[i].Cells[0].Value = (i + 1).ToString();
@@ -123,10 +124,11 @@ namespace GroundControl
         private void addPointToPath(PointLatLng point)
         {
             lPointsPath.Add(point);
-            GMapRoute path = new GMapRoute(lPointsPath, "Path");
-            PathOverlay.Clear();
-            PathOverlay.Routes.Add(path);
-
+            addPathMarker(point);
+            RenderPath();
+        }
+        public void addPathMarker(PointLatLng point)
+        {
             if (lPointsPath.Count == 1)
             {
                 //adds a marker to the begginging of the path
@@ -137,11 +139,18 @@ namespace GroundControl
             {
                 //adds markers to each point on the path except the first
                 //leaves most recent point empty in case the path is ended there and the ending marker needs to be placed
-                GMarkerGoogle newMarker = new GMarkerGoogle(lPointsPath[lPointsPath.Count - 2],GMarkerGoogleType.gray_small);
+                GMarkerGoogle newMarker = new GMarkerGoogle(lPointsPath[lPointsPath.Count - 2], GMarkerGoogleType.gray_small);
                 MarkerOverlay.Markers.Add(newMarker);
             }
+        }
+        private void RenderPath()
+        {
+            GMapRoute path = new GMapRoute(lPointsPath, "Path");
+            PathOverlay.Clear();
+            PathOverlay.Routes.Add(path);
             updateTable();
         }
+
         private void beginPath()
         {
             //enables all buttons and textboxes necessary for creating a path 
@@ -241,6 +250,11 @@ namespace GroundControl
             GMapPolygon poly = new GMapPolygon(lPointsPoly, "Poly");
             PolyOverlay.Clear();
             PolyOverlay.Polygons.Add(poly);
+
+            FlightPath.GenerateSurvey(lPointsPoly, lPointsConvexHull, lPointsPath, 0, 0, 0);
+            foreach (PointLatLng point in lPointsPath)
+                addPathMarker(point);
+            RenderPath();
         }
         private void btnPolyClear_Click(object sender, EventArgs e)
         {

@@ -31,7 +31,6 @@
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.gMapMain = new GMap.NET.WindowsForms.GMapControl();
             this.trBarZoom = new System.Windows.Forms.TrackBar();
-            this.grBxPath = new System.Windows.Forms.GroupBox();
             this.btnAddPathPoint = new System.Windows.Forms.Button();
             this.lblLLngPath = new System.Windows.Forms.Label();
             this.lblLatPath = new System.Windows.Forms.Label();
@@ -40,7 +39,6 @@
             this.btnPathClear = new System.Windows.Forms.Button();
             this.btnPathEnd = new System.Windows.Forms.Button();
             this.btnPathBegin = new System.Windows.Forms.Button();
-            this.grBxPolygon = new System.Windows.Forms.GroupBox();
             this.btnAddPolyPoint = new System.Windows.Forms.Button();
             this.btnPolyBegin = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -65,14 +63,22 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statLat = new System.Windows.Forms.ToolStripStatusLabel();
             this.statLng = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tbPathControls = new System.Windows.Forms.TabControl();
+            this.tbPgFlighPath = new System.Windows.Forms.TabPage();
+            this.tbPgSurvey = new System.Windows.Forms.TabPage();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).BeginInit();
-            this.grBxPath.SuspendLayout();
-            this.grBxPolygon.SuspendLayout();
             this.grBxPoints.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGViewWaypoints)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            this.tbPathControls.SuspendLayout();
+            this.tbPgFlighPath.SuspendLayout();
+            this.tbPgSurvey.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -81,7 +87,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpMain.ColumnCount = 6;
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 263F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -89,9 +95,8 @@
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 265F));
             this.tlpMain.Controls.Add(this.gMapMain, 1, 0);
             this.tlpMain.Controls.Add(this.trBarZoom, 4, 0);
-            this.tlpMain.Controls.Add(this.grBxPath, 0, 0);
-            this.tlpMain.Controls.Add(this.grBxPolygon, 0, 1);
             this.tlpMain.Controls.Add(this.grBxPoints, 5, 0);
+            this.tlpMain.Controls.Add(this.tbPathControls, 0, 0);
             this.tlpMain.Location = new System.Drawing.Point(0, 24);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 3;
@@ -99,7 +104,6 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 125F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMain.Size = new System.Drawing.Size(1087, 690);
             this.tlpMain.TabIndex = 0;
             // 
@@ -114,7 +118,7 @@
             this.gMapMain.GrayScaleMode = false;
             this.gMapMain.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gMapMain.LevelsKeepInMemmory = 5;
-            this.gMapMain.Location = new System.Drawing.Point(253, 3);
+            this.gMapMain.Location = new System.Drawing.Point(266, 3);
             this.gMapMain.MarkersEnabled = true;
             this.gMapMain.MaxZoom = 2;
             this.gMapMain.MinZoom = 2;
@@ -128,7 +132,7 @@
             this.gMapMain.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapMain.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapMain.ShowTileGridLines = false;
-            this.gMapMain.Size = new System.Drawing.Size(528, 684);
+            this.gMapMain.Size = new System.Drawing.Size(513, 684);
             this.gMapMain.TabIndex = 0;
             this.gMapMain.Zoom = 0D;
             this.gMapMain.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.gMapMain_OnMapZoomChanged);
@@ -138,7 +142,7 @@
             // trBarZoom
             // 
             this.trBarZoom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trBarZoom.Location = new System.Drawing.Point(787, 3);
+            this.trBarZoom.Location = new System.Drawing.Point(785, 3);
             this.trBarZoom.Name = "trBarZoom";
             this.trBarZoom.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tlpMain.SetRowSpan(this.trBarZoom, 4);
@@ -146,28 +150,10 @@
             this.trBarZoom.TabIndex = 1;
             this.trBarZoom.Scroll += new System.EventHandler(this.trBarZoom_Scroll);
             // 
-            // grBxPath
-            // 
-            this.grBxPath.Controls.Add(this.btnAddPathPoint);
-            this.grBxPath.Controls.Add(this.lblLLngPath);
-            this.grBxPath.Controls.Add(this.lblLatPath);
-            this.grBxPath.Controls.Add(this.txbxLngPath);
-            this.grBxPath.Controls.Add(this.txbxLatPath);
-            this.grBxPath.Controls.Add(this.btnPathClear);
-            this.grBxPath.Controls.Add(this.btnPathEnd);
-            this.grBxPath.Controls.Add(this.btnPathBegin);
-            this.grBxPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grBxPath.Location = new System.Drawing.Point(3, 3);
-            this.grBxPath.Name = "grBxPath";
-            this.grBxPath.Size = new System.Drawing.Size(244, 119);
-            this.grBxPath.TabIndex = 2;
-            this.grBxPath.TabStop = false;
-            this.grBxPath.Text = "Flight Path";
-            // 
             // btnAddPathPoint
             // 
             this.btnAddPathPoint.Enabled = false;
-            this.btnAddPathPoint.Location = new System.Drawing.Point(6, 87);
+            this.btnAddPathPoint.Location = new System.Drawing.Point(6, 74);
             this.btnAddPathPoint.Name = "btnAddPathPoint";
             this.btnAddPathPoint.Size = new System.Drawing.Size(75, 23);
             this.btnAddPathPoint.TabIndex = 7;
@@ -178,7 +164,7 @@
             // lblLLngPath
             // 
             this.lblLLngPath.AutoSize = true;
-            this.lblLLngPath.Location = new System.Drawing.Point(109, 45);
+            this.lblLLngPath.Location = new System.Drawing.Point(109, 32);
             this.lblLLngPath.Name = "lblLLngPath";
             this.lblLLngPath.Size = new System.Drawing.Size(34, 13);
             this.lblLLngPath.TabIndex = 6;
@@ -187,7 +173,7 @@
             // lblLatPath
             // 
             this.lblLatPath.AutoSize = true;
-            this.lblLatPath.Location = new System.Drawing.Point(6, 45);
+            this.lblLatPath.Location = new System.Drawing.Point(6, 32);
             this.lblLatPath.Name = "lblLatPath";
             this.lblLatPath.Size = new System.Drawing.Size(25, 13);
             this.lblLatPath.TabIndex = 5;
@@ -196,7 +182,7 @@
             // txbxLngPath
             // 
             this.txbxLngPath.Enabled = false;
-            this.txbxLngPath.Location = new System.Drawing.Point(112, 61);
+            this.txbxLngPath.Location = new System.Drawing.Point(112, 48);
             this.txbxLngPath.Name = "txbxLngPath";
             this.txbxLngPath.Size = new System.Drawing.Size(100, 20);
             this.txbxLngPath.TabIndex = 4;
@@ -204,14 +190,14 @@
             // txbxLatPath
             // 
             this.txbxLatPath.Enabled = false;
-            this.txbxLatPath.Location = new System.Drawing.Point(6, 61);
+            this.txbxLatPath.Location = new System.Drawing.Point(6, 48);
             this.txbxLatPath.Name = "txbxLatPath";
             this.txbxLatPath.Size = new System.Drawing.Size(100, 20);
             this.txbxLatPath.TabIndex = 3;
             // 
             // btnPathClear
             // 
-            this.btnPathClear.Location = new System.Drawing.Point(166, 19);
+            this.btnPathClear.Location = new System.Drawing.Point(168, 6);
             this.btnPathClear.Name = "btnPathClear";
             this.btnPathClear.Size = new System.Drawing.Size(75, 23);
             this.btnPathClear.TabIndex = 2;
@@ -222,7 +208,7 @@
             // btnPathEnd
             // 
             this.btnPathEnd.Enabled = false;
-            this.btnPathEnd.Location = new System.Drawing.Point(86, 19);
+            this.btnPathEnd.Location = new System.Drawing.Point(87, 6);
             this.btnPathEnd.Name = "btnPathEnd";
             this.btnPathEnd.Size = new System.Drawing.Size(75, 23);
             this.btnPathEnd.TabIndex = 1;
@@ -232,7 +218,7 @@
             // 
             // btnPathBegin
             // 
-            this.btnPathBegin.Location = new System.Drawing.Point(6, 19);
+            this.btnPathBegin.Location = new System.Drawing.Point(6, 6);
             this.btnPathBegin.Name = "btnPathBegin";
             this.btnPathBegin.Size = new System.Drawing.Size(75, 23);
             this.btnPathBegin.TabIndex = 0;
@@ -240,28 +226,10 @@
             this.btnPathBegin.UseVisualStyleBackColor = true;
             this.btnPathBegin.Click += new System.EventHandler(this.btnPathBegin_Click);
             // 
-            // grBxPolygon
-            // 
-            this.grBxPolygon.Controls.Add(this.btnAddPolyPoint);
-            this.grBxPolygon.Controls.Add(this.btnPolyBegin);
-            this.grBxPolygon.Controls.Add(this.label1);
-            this.grBxPolygon.Controls.Add(this.btnPolyEnd);
-            this.grBxPolygon.Controls.Add(this.label2);
-            this.grBxPolygon.Controls.Add(this.btnPolyClear);
-            this.grBxPolygon.Controls.Add(this.txbxLngPoly);
-            this.grBxPolygon.Controls.Add(this.txbxLatPoly);
-            this.grBxPolygon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grBxPolygon.Location = new System.Drawing.Point(3, 128);
-            this.grBxPolygon.Name = "grBxPolygon";
-            this.grBxPolygon.Size = new System.Drawing.Size(244, 119);
-            this.grBxPolygon.TabIndex = 5;
-            this.grBxPolygon.TabStop = false;
-            this.grBxPolygon.Text = "Polygon";
-            // 
             // btnAddPolyPoint
             // 
             this.btnAddPolyPoint.Enabled = false;
-            this.btnAddPolyPoint.Location = new System.Drawing.Point(6, 87);
+            this.btnAddPolyPoint.Location = new System.Drawing.Point(6, 74);
             this.btnAddPolyPoint.Name = "btnAddPolyPoint";
             this.btnAddPolyPoint.Size = new System.Drawing.Size(75, 23);
             this.btnAddPolyPoint.TabIndex = 15;
@@ -271,7 +239,7 @@
             // 
             // btnPolyBegin
             // 
-            this.btnPolyBegin.Location = new System.Drawing.Point(6, 19);
+            this.btnPolyBegin.Location = new System.Drawing.Point(6, 6);
             this.btnPolyBegin.Name = "btnPolyBegin";
             this.btnPolyBegin.Size = new System.Drawing.Size(75, 23);
             this.btnPolyBegin.TabIndex = 8;
@@ -282,7 +250,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(109, 45);
+            this.label1.Location = new System.Drawing.Point(109, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 14;
@@ -291,7 +259,7 @@
             // btnPolyEnd
             // 
             this.btnPolyEnd.Enabled = false;
-            this.btnPolyEnd.Location = new System.Drawing.Point(86, 19);
+            this.btnPolyEnd.Location = new System.Drawing.Point(87, 6);
             this.btnPolyEnd.Name = "btnPolyEnd";
             this.btnPolyEnd.Size = new System.Drawing.Size(75, 23);
             this.btnPolyEnd.TabIndex = 9;
@@ -302,7 +270,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 45);
+            this.label2.Location = new System.Drawing.Point(6, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(25, 13);
             this.label2.TabIndex = 13;
@@ -310,7 +278,7 @@
             // 
             // btnPolyClear
             // 
-            this.btnPolyClear.Location = new System.Drawing.Point(166, 19);
+            this.btnPolyClear.Location = new System.Drawing.Point(168, 6);
             this.btnPolyClear.Name = "btnPolyClear";
             this.btnPolyClear.Size = new System.Drawing.Size(75, 23);
             this.btnPolyClear.TabIndex = 10;
@@ -321,7 +289,7 @@
             // txbxLngPoly
             // 
             this.txbxLngPoly.Enabled = false;
-            this.txbxLngPoly.Location = new System.Drawing.Point(112, 61);
+            this.txbxLngPoly.Location = new System.Drawing.Point(112, 48);
             this.txbxLngPoly.Name = "txbxLngPoly";
             this.txbxLngPoly.Size = new System.Drawing.Size(100, 20);
             this.txbxLngPoly.TabIndex = 12;
@@ -329,7 +297,7 @@
             // txbxLatPoly
             // 
             this.txbxLatPoly.Enabled = false;
-            this.txbxLatPoly.Location = new System.Drawing.Point(6, 61);
+            this.txbxLatPoly.Location = new System.Drawing.Point(6, 48);
             this.txbxLatPoly.Name = "txbxLatPoly";
             this.txbxLatPoly.Size = new System.Drawing.Size(100, 20);
             this.txbxLatPoly.TabIndex = 11;
@@ -338,10 +306,10 @@
             // 
             this.grBxPoints.Controls.Add(this.dGViewWaypoints);
             this.grBxPoints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grBxPoints.Location = new System.Drawing.Point(825, 3);
+            this.grBxPoints.Location = new System.Drawing.Point(823, 3);
             this.grBxPoints.Name = "grBxPoints";
             this.tlpMain.SetRowSpan(this.grBxPoints, 4);
-            this.grBxPoints.Size = new System.Drawing.Size(259, 684);
+            this.grBxPoints.Size = new System.Drawing.Size(261, 684);
             this.grBxPoints.TabIndex = 4;
             this.grBxPoints.TabStop = false;
             this.grBxPoints.Text = "Points";
@@ -361,7 +329,7 @@
             this.dGViewWaypoints.ReadOnly = true;
             this.dGViewWaypoints.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dGViewWaypoints.RowHeadersVisible = false;
-            this.dGViewWaypoints.Size = new System.Drawing.Size(253, 665);
+            this.dGViewWaypoints.Size = new System.Drawing.Size(255, 665);
             this.dGViewWaypoints.TabIndex = 0;
             // 
             // WaypointNumber
@@ -470,6 +438,70 @@
             this.statLng.Size = new System.Drawing.Size(37, 17);
             this.statLng.Text = "Long:";
             // 
+            // tbPathControls
+            // 
+            this.tbPathControls.Controls.Add(this.tbPgFlighPath);
+            this.tbPathControls.Controls.Add(this.tbPgSurvey);
+            this.tbPathControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbPathControls.Location = new System.Drawing.Point(3, 3);
+            this.tbPathControls.Name = "tbPathControls";
+            this.tlpMain.SetRowSpan(this.tbPathControls, 3);
+            this.tbPathControls.SelectedIndex = 0;
+            this.tbPathControls.Size = new System.Drawing.Size(257, 494);
+            this.tbPathControls.TabIndex = 6;
+            // 
+            // tbPgFlighPath
+            // 
+            this.tbPgFlighPath.Controls.Add(this.lblLatPath);
+            this.tbPgFlighPath.Controls.Add(this.btnAddPathPoint);
+            this.tbPgFlighPath.Controls.Add(this.btnPathBegin);
+            this.tbPgFlighPath.Controls.Add(this.lblLLngPath);
+            this.tbPgFlighPath.Controls.Add(this.btnPathEnd);
+            this.tbPgFlighPath.Controls.Add(this.btnPathClear);
+            this.tbPgFlighPath.Controls.Add(this.txbxLngPath);
+            this.tbPgFlighPath.Controls.Add(this.txbxLatPath);
+            this.tbPgFlighPath.Location = new System.Drawing.Point(4, 22);
+            this.tbPgFlighPath.Name = "tbPgFlighPath";
+            this.tbPgFlighPath.Padding = new System.Windows.Forms.Padding(3);
+            this.tbPgFlighPath.Size = new System.Drawing.Size(249, 218);
+            this.tbPgFlighPath.TabIndex = 0;
+            this.tbPgFlighPath.Text = "Flight Path";
+            this.tbPgFlighPath.UseVisualStyleBackColor = true;
+            // 
+            // tbPgSurvey
+            // 
+            this.tbPgSurvey.Controls.Add(this.numericUpDown2);
+            this.tbPgSurvey.Controls.Add(this.numericUpDown1);
+            this.tbPgSurvey.Controls.Add(this.btnAddPolyPoint);
+            this.tbPgSurvey.Controls.Add(this.btnPolyBegin);
+            this.tbPgSurvey.Controls.Add(this.txbxLatPoly);
+            this.tbPgSurvey.Controls.Add(this.label1);
+            this.tbPgSurvey.Controls.Add(this.txbxLngPoly);
+            this.tbPgSurvey.Controls.Add(this.btnPolyEnd);
+            this.tbPgSurvey.Controls.Add(this.btnPolyClear);
+            this.tbPgSurvey.Controls.Add(this.label2);
+            this.tbPgSurvey.Location = new System.Drawing.Point(4, 22);
+            this.tbPgSurvey.Name = "tbPgSurvey";
+            this.tbPgSurvey.Padding = new System.Windows.Forms.Padding(3);
+            this.tbPgSurvey.Size = new System.Drawing.Size(249, 468);
+            this.tbPgSurvey.TabIndex = 1;
+            this.tbPgSurvey.Text = "Survey Polygon";
+            this.tbPgSurvey.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(6, 142);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(115, 20);
+            this.numericUpDown1.TabIndex = 16;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(128, 142);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(115, 20);
+            this.numericUpDown2.TabIndex = 17;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,16 +518,19 @@
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).EndInit();
-            this.grBxPath.ResumeLayout(false);
-            this.grBxPath.PerformLayout();
-            this.grBxPolygon.ResumeLayout(false);
-            this.grBxPolygon.PerformLayout();
             this.grBxPoints.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dGViewWaypoints)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.tbPathControls.ResumeLayout(false);
+            this.tbPgFlighPath.ResumeLayout(false);
+            this.tbPgFlighPath.PerformLayout();
+            this.tbPgSurvey.ResumeLayout(false);
+            this.tbPgSurvey.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -506,7 +541,6 @@
         private System.Windows.Forms.TableLayoutPanel tlpMain;
         private GMap.NET.WindowsForms.GMapControl gMapMain;
         private System.Windows.Forms.TrackBar trBarZoom;
-        private System.Windows.Forms.GroupBox grBxPath;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
@@ -518,7 +552,6 @@
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statLat;
         private System.Windows.Forms.ToolStripStatusLabel statLng;
-        private System.Windows.Forms.GroupBox grBxPolygon;
         private System.Windows.Forms.GroupBox grBxPoints;
         private System.Windows.Forms.DataGridView dGViewWaypoints;
         private System.Windows.Forms.Button btnPathEnd;
@@ -540,6 +573,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn WaypointNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lat;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lng;
+        private System.Windows.Forms.TabControl tbPathControls;
+        private System.Windows.Forms.TabPage tbPgFlighPath;
+        private System.Windows.Forms.TabPage tbPgSurvey;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
 
 
 

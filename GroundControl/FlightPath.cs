@@ -18,6 +18,20 @@ namespace GroundControl
             
         }
 
+        public void GenerateSurvey(List<PointLatLng> lPointsPoly, List<PointLatLng> lPointsConvexHull, List<PointLatLng> lPointsPath, double dPathSpacing, double dPointSpacing, double dAngle)
+        {
+            lPointsPath.Clear();
+
+            foreach (PointLatLng point in lPointsConvexHull)
+            {
+                lPointsPath.Add(point);
+            }
+        }
+
+        public void ImportFromText(string sFile)
+        {
+
+        }
         public void ExportToText(List<PointLatLng> lPoints, string sFile)
         {
             //exports flight plan to format suitable for use with telemtry radio program.
