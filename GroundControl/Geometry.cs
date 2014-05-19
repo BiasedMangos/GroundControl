@@ -37,7 +37,7 @@ namespace GroundControl
             return Math.PI - (dSlope23 - dSlope12);
         }
 
-        public List<PointLatLng> ConvexHull(List<PointLatLng> lPoints)
+        public void ConvexHull(List<PointLatLng> lPoints)
         {
             //any polygons drawn willautomatically be edited so that they progress in an anticlockwise direction
             //otherwise this convex hull function would be measuring the outside angles
@@ -76,13 +76,7 @@ namespace GroundControl
                 }
             } while (!bDone && ++iLoopCount <4);
 
-            /*dCcw = ccw(lPoints[lPoints.Count - 2].Lng, lPoints[lPoints.Count - 2].Lat, lPoints[lPoints.Count - 1].Lng, lPoints[lPoints.Count - 1].Lat, lPoints[0].Lng, lPoints[0].Lat);
-            if (dCcw < 0)   lPoints.RemoveAt(lPoints.Count - 1);
-
-            dCcw = ccw(lPoints[lPoints.Count - 1].Lng, lPoints[lPoints.Count - 1].Lat, lPoints[0].Lng, lPoints[0].Lat, lPoints[1].Lng, lPoints[1].Lat);
-            if (dCcw < 0) lPoints.RemoveAt(0);
-            */
-            return lPoints;
+            //return lPoints;
         }
         public void ReverseList(ref List<PointLatLng> lPoints)
         {

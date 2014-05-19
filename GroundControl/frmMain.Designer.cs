@@ -40,11 +40,6 @@
             this.btnPathClear = new System.Windows.Forms.Button();
             this.btnPathEnd = new System.Windows.Forms.Button();
             this.btnPathBegin = new System.Windows.Forms.Button();
-            this.grBxPoints = new System.Windows.Forms.GroupBox();
-            this.dGViewWaypoints = new System.Windows.Forms.DataGridView();
-            this.WaypointNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lng = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grBxPolygon = new System.Windows.Forms.GroupBox();
             this.btnAddPolyPoint = new System.Windows.Forms.Button();
             this.btnPolyBegin = new System.Windows.Forms.Button();
@@ -54,6 +49,11 @@
             this.btnPolyClear = new System.Windows.Forms.Button();
             this.txbxLngPoly = new System.Windows.Forms.TextBox();
             this.txbxLatPoly = new System.Windows.Forms.TextBox();
+            this.grBxPoints = new System.Windows.Forms.GroupBox();
+            this.dGViewWaypoints = new System.Windows.Forms.DataGridView();
+            this.WaypointNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lng = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,9 +68,9 @@
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).BeginInit();
             this.grBxPath.SuspendLayout();
+            this.grBxPolygon.SuspendLayout();
             this.grBxPoints.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGViewWaypoints)).BeginInit();
-            this.grBxPolygon.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -128,7 +128,7 @@
             this.gMapMain.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapMain.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapMain.ShowTileGridLines = false;
-            this.gMapMain.Size = new System.Drawing.Size(525, 684);
+            this.gMapMain.Size = new System.Drawing.Size(528, 684);
             this.gMapMain.TabIndex = 0;
             this.gMapMain.Zoom = 0D;
             this.gMapMain.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.gMapMain_OnMapZoomChanged);
@@ -138,7 +138,7 @@
             // trBarZoom
             // 
             this.trBarZoom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trBarZoom.Location = new System.Drawing.Point(784, 3);
+            this.trBarZoom.Location = new System.Drawing.Point(787, 3);
             this.trBarZoom.Name = "trBarZoom";
             this.trBarZoom.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tlpMain.SetRowSpan(this.trBarZoom, 4);
@@ -240,59 +240,6 @@
             this.btnPathBegin.UseVisualStyleBackColor = true;
             this.btnPathBegin.Click += new System.EventHandler(this.btnPathBegin_Click);
             // 
-            // grBxPoints
-            // 
-            this.grBxPoints.Controls.Add(this.dGViewWaypoints);
-            this.grBxPoints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grBxPoints.Location = new System.Drawing.Point(822, 3);
-            this.grBxPoints.Name = "grBxPoints";
-            this.tlpMain.SetRowSpan(this.grBxPoints, 4);
-            this.grBxPoints.Size = new System.Drawing.Size(262, 684);
-            this.grBxPoints.TabIndex = 4;
-            this.grBxPoints.TabStop = false;
-            this.grBxPoints.Text = "Points";
-            // 
-            // dGViewWaypoints
-            // 
-            this.dGViewWaypoints.AllowUserToAddRows = false;
-            this.dGViewWaypoints.AllowUserToDeleteRows = false;
-            this.dGViewWaypoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGViewWaypoints.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.WaypointNumber,
-            this.Lat,
-            this.Lng});
-            this.dGViewWaypoints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dGViewWaypoints.Location = new System.Drawing.Point(3, 16);
-            this.dGViewWaypoints.Name = "dGViewWaypoints";
-            this.dGViewWaypoints.ReadOnly = true;
-            this.dGViewWaypoints.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dGViewWaypoints.RowHeadersVisible = false;
-            this.dGViewWaypoints.Size = new System.Drawing.Size(256, 665);
-            this.dGViewWaypoints.TabIndex = 0;
-            // 
-            // WaypointNumber
-            // 
-            this.WaypointNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.WaypointNumber.HeaderText = "No.";
-            this.WaypointNumber.Name = "WaypointNumber";
-            this.WaypointNumber.ReadOnly = true;
-            this.WaypointNumber.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.WaypointNumber.Width = 49;
-            // 
-            // Lat
-            // 
-            this.Lat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Lat.HeaderText = "Lat";
-            this.Lat.Name = "Lat";
-            this.Lat.ReadOnly = true;
-            // 
-            // Lng
-            // 
-            this.Lng.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Lng.HeaderText = "Long";
-            this.Lng.Name = "Lng";
-            this.Lng.ReadOnly = true;
-            // 
             // grBxPolygon
             // 
             this.grBxPolygon.Controls.Add(this.btnAddPolyPoint);
@@ -386,6 +333,59 @@
             this.txbxLatPoly.Name = "txbxLatPoly";
             this.txbxLatPoly.Size = new System.Drawing.Size(100, 20);
             this.txbxLatPoly.TabIndex = 11;
+            // 
+            // grBxPoints
+            // 
+            this.grBxPoints.Controls.Add(this.dGViewWaypoints);
+            this.grBxPoints.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grBxPoints.Location = new System.Drawing.Point(825, 3);
+            this.grBxPoints.Name = "grBxPoints";
+            this.tlpMain.SetRowSpan(this.grBxPoints, 4);
+            this.grBxPoints.Size = new System.Drawing.Size(259, 684);
+            this.grBxPoints.TabIndex = 4;
+            this.grBxPoints.TabStop = false;
+            this.grBxPoints.Text = "Points";
+            // 
+            // dGViewWaypoints
+            // 
+            this.dGViewWaypoints.AllowUserToAddRows = false;
+            this.dGViewWaypoints.AllowUserToDeleteRows = false;
+            this.dGViewWaypoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGViewWaypoints.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.WaypointNumber,
+            this.Lat,
+            this.Lng});
+            this.dGViewWaypoints.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dGViewWaypoints.Location = new System.Drawing.Point(3, 16);
+            this.dGViewWaypoints.Name = "dGViewWaypoints";
+            this.dGViewWaypoints.ReadOnly = true;
+            this.dGViewWaypoints.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dGViewWaypoints.RowHeadersVisible = false;
+            this.dGViewWaypoints.Size = new System.Drawing.Size(253, 665);
+            this.dGViewWaypoints.TabIndex = 0;
+            // 
+            // WaypointNumber
+            // 
+            this.WaypointNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.WaypointNumber.HeaderText = "No.";
+            this.WaypointNumber.Name = "WaypointNumber";
+            this.WaypointNumber.ReadOnly = true;
+            this.WaypointNumber.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.WaypointNumber.Width = 49;
+            // 
+            // Lat
+            // 
+            this.Lat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Lat.HeaderText = "Lat";
+            this.Lat.Name = "Lat";
+            this.Lat.ReadOnly = true;
+            // 
+            // Lng
+            // 
+            this.Lng.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Lng.HeaderText = "Long";
+            this.Lng.Name = "Lng";
+            this.Lng.ReadOnly = true;
             // 
             // menuStrip
             // 
@@ -488,10 +488,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).EndInit();
             this.grBxPath.ResumeLayout(false);
             this.grBxPath.PerformLayout();
-            this.grBxPoints.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dGViewWaypoints)).EndInit();
             this.grBxPolygon.ResumeLayout(false);
             this.grBxPolygon.PerformLayout();
+            this.grBxPoints.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dGViewWaypoints)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);

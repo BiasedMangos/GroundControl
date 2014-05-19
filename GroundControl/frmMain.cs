@@ -30,8 +30,10 @@ namespace GroundControl
         GMapOverlay PathOverlay;
         GMapOverlay PolyOverlay;
 
-        List<PointLatLng> pointsPath;
-        List<PointLatLng> pointsPoly;
+        List<PointLatLng> lPointsPath;
+        List<PointLatLng> lPointsPoly;
+        List<PointLatLng> lPointsConvexHull;
+
 
         enum mode { idle, path, poly }
         mode drawingMode;
@@ -70,8 +72,8 @@ namespace GroundControl
             gMapMain.Overlays.Add(PolyOverlay);
 
             //initializes lists of points used for paths and polygons
-            pointsPath = new List<PointLatLng>();
-            pointsPoly = new List<PointLatLng>(); 
+            lPointsPath = new List<PointLatLng>();
+            lPointsPoly = new List<PointLatLng>(); 
         }
 
 
@@ -110,32 +112,32 @@ namespace GroundControl
         {
             //displays waypoint coordinates for flight path in table
             dGViewWaypoints.Rows.Add(1);
-            for (int i = 0; i < pointsPath.Count; i++)
+            for (int i = 0; i < lPointsPath.Count; i++)
             {
                 dGViewWaypoints.Rows[i].Cells[0].Value = (i + 1).ToString();
-                dGViewWaypoints.Rows[i].Cells[1].Value = pointsPath[i].Lat.ToString();
-                dGViewWaypoints.Rows[i].Cells[2].Value = pointsPath[i].Lng.ToString();
+                dGViewWaypoints.Rows[i].Cells[1].Value = lPointsPath[i].Lat.ToString();
+                dGViewWaypoints.Rows[i].Cells[2].Value = lPointsPath[i].Lng.ToString();
             }
         }
 
         private void addPointToPath(PointLatLng point)
         {
-            pointsPath.Add(point);
-            GMapRoute path = new GMapRoute(pointsPath, "Path");
+            lPointsPath.Add(point);
+            GMapRoute path = new GMapRoute(lPointsPath, "Path");
             PathOverlay.Clear();
             PathOverlay.Routes.Add(path);
 
-            if (pointsPath.Count == 1)
+            if (lPointsPath.Count == 1)
             {
                 //adds a marker to the begginging of the path
                 GMarkerGoogle newMarker = new GMarkerGoogle(point, GMarkerGoogleType.green);
                 MarkerOverlay.Markers.Add(newMarker);
             }
-            else if (pointsPath.Count > 2)
+            else if (lPointsPath.Count > 2)
             {
                 //adds markers to each point on the path except the first
                 //leaves most recent point empty in case the path is ended there and the ending marker needs to be placed
-                GMarkerGoogle newMarker = new GMarkerGoogle(pointsPath[pointsPath.Count - 2],GMarkerGoogleType.gray_small);
+                GMarkerGoogle newMarker = new GMarkerGoogle(lPointsPath[lPointsPath.Count - 2],GMarkerGoogleType.gray_small);
                 MarkerOverlay.Markers.Add(newMarker);
             }
             updateTable();
@@ -170,9 +172,9 @@ namespace GroundControl
         {
             endPath();
             //adds marker to end of path
-            if (pointsPath.Count > 0)
+            if (lPointsPath.Count > 0)
             {
-                GMarkerGoogle newMarker = new GMarkerGoogle(pointsPath.Last<PointLatLng>(), GMarkerGoogleType.red);
+                GMarkerGoogle newMarker = new GMarkerGoogle(lPointsPath.Last<PointLatLng>(), GMarkerGoogleType.red);
                 MarkerOverlay.Markers.Add(newMarker);
             }
         }
@@ -180,7 +182,7 @@ namespace GroundControl
         {
             endPath();
             PathOverlay.Clear();
-            pointsPath.Clear();
+            lPointsPath.Clear();
             MarkerOverlay.Clear();
             dGViewWaypoints.Rows.Clear();
         }
@@ -198,9 +200,9 @@ namespace GroundControl
 
         private void addPointToPoly(PointLatLng point)
         {
-            pointsPoly.Add(point);
+            lPointsPoly.Add(point);
 
-            GMapPolygon poly = new GMapPolygon(pointsPoly, "Poly");
+            GMapPolygon poly = new GMapPolygon(lPointsPoly, "Poly");
             PolyOverlay.Clear();
             PolyOverlay.Polygons.Add(poly);
         }
@@ -225,9 +227,8 @@ namespace GroundControl
             txbxLatPoly.Enabled = false;
             txbxLngPoly.Enabled = false;
             btnAddPolyPoint.Enabled = false;
-
-            //REVERSE POLYGON NEEDS TO GO HERE, WRITE A NEW FUNCTION FOR IT +_______________________________________________________________________________)_)(+)_(_)(+_)(+_)+_(+_)(+_)
-
+            lPointsConvexHull = new List<PointLatLng>(lPointsPoly);
+            Geometry.ConvexHull(lPointsConvexHull);
         }
         private void btnPolyBegin_Click(object sender, EventArgs e)
         {
@@ -236,8 +237,8 @@ namespace GroundControl
         private void btnPolyEnd_Click(object sender, EventArgs e)
         {
             endPoly();
-            Geometry.ConvexHull(pointsPoly);
-            GMapPolygon poly = new GMapPolygon(pointsPoly, "Poly");
+            //Geometry.ConvexHull(lPointsPoly);
+            GMapPolygon poly = new GMapPolygon(lPointsPoly, "Poly");
             PolyOverlay.Clear();
             PolyOverlay.Polygons.Add(poly);
         }
@@ -245,7 +246,8 @@ namespace GroundControl
         {
             endPoly();
             PolyOverlay.Clear();
-            pointsPoly.Clear();
+            lPointsPoly.Clear();
+            lPointsConvexHull.Clear();
         }
         private void btnAddPolyPoint_Click(object sender, EventArgs e)
         {
@@ -267,7 +269,7 @@ namespace GroundControl
             dialog.InitialDirectory = @"C:\";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                FlightPath.ExportToText(pointsPath, dialog.FileName.ToString());
+                FlightPath.ExportToText(lPointsPath, dialog.FileName.ToString());
             }
         }
 
@@ -285,6 +287,7 @@ namespace GroundControl
         }
 
         #endregion
+
 
 
     }
