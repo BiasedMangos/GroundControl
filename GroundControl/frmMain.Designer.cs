@@ -31,27 +31,32 @@
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.gMapMain = new GMap.NET.WindowsForms.GMapControl();
             this.trBarZoom = new System.Windows.Forms.TrackBar();
-            this.btnAddPathPoint = new System.Windows.Forms.Button();
-            this.lblLLngPath = new System.Windows.Forms.Label();
-            this.lblLatPath = new System.Windows.Forms.Label();
-            this.txbxLngPath = new System.Windows.Forms.TextBox();
-            this.txbxLatPath = new System.Windows.Forms.TextBox();
-            this.btnPathClear = new System.Windows.Forms.Button();
-            this.btnPathEnd = new System.Windows.Forms.Button();
-            this.btnPathBegin = new System.Windows.Forms.Button();
-            this.btnAddPolyPoint = new System.Windows.Forms.Button();
-            this.btnPolyBegin = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnPolyEnd = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnPolyClear = new System.Windows.Forms.Button();
-            this.txbxLngPoly = new System.Windows.Forms.TextBox();
-            this.txbxLatPoly = new System.Windows.Forms.TextBox();
             this.grBxPoints = new System.Windows.Forms.GroupBox();
             this.dGViewWaypoints = new System.Windows.Forms.DataGridView();
             this.WaypointNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Lat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Lng = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbPathControls = new System.Windows.Forms.TabControl();
+            this.tbPgFlighPath = new System.Windows.Forms.TabPage();
+            this.lblLatPath = new System.Windows.Forms.Label();
+            this.btnAddPathPoint = new System.Windows.Forms.Button();
+            this.btnPathBegin = new System.Windows.Forms.Button();
+            this.lblLLngPath = new System.Windows.Forms.Label();
+            this.btnPathEnd = new System.Windows.Forms.Button();
+            this.btnPathClear = new System.Windows.Forms.Button();
+            this.txbxLngPath = new System.Windows.Forms.TextBox();
+            this.txbxLatPath = new System.Windows.Forms.TextBox();
+            this.tbPgSurvey = new System.Windows.Forms.TabPage();
+            this.nudPointSpacing = new System.Windows.Forms.NumericUpDown();
+            this.nudPathSpacing = new System.Windows.Forms.NumericUpDown();
+            this.btnAddPolyPoint = new System.Windows.Forms.Button();
+            this.btnPolyBegin = new System.Windows.Forms.Button();
+            this.txbxLatPoly = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txbxLngPoly = new System.Windows.Forms.TextBox();
+            this.btnPolyEnd = new System.Windows.Forms.Button();
+            this.btnPolyClear = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,22 +68,19 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statLat = new System.Windows.Forms.ToolStripStatusLabel();
             this.statLng = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tbPathControls = new System.Windows.Forms.TabControl();
-            this.tbPgFlighPath = new System.Windows.Forms.TabPage();
-            this.tbPgSurvey = new System.Windows.Forms.TabPage();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).BeginInit();
             this.grBxPoints.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGViewWaypoints)).BeginInit();
-            this.menuStrip.SuspendLayout();
-            this.statusStrip.SuspendLayout();
             this.tbPathControls.SuspendLayout();
             this.tbPgFlighPath.SuspendLayout();
             this.tbPgSurvey.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPointSpacing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPathSpacing)).BeginInit();
+            this.menuStrip.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -92,7 +94,7 @@
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 265F));
+            this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 267F));
             this.tlpMain.Controls.Add(this.gMapMain, 1, 0);
             this.tlpMain.Controls.Add(this.trBarZoom, 4, 0);
             this.tlpMain.Controls.Add(this.grBxPoints, 5, 0);
@@ -150,158 +152,6 @@
             this.trBarZoom.TabIndex = 1;
             this.trBarZoom.Scroll += new System.EventHandler(this.trBarZoom_Scroll);
             // 
-            // btnAddPathPoint
-            // 
-            this.btnAddPathPoint.Enabled = false;
-            this.btnAddPathPoint.Location = new System.Drawing.Point(6, 74);
-            this.btnAddPathPoint.Name = "btnAddPathPoint";
-            this.btnAddPathPoint.Size = new System.Drawing.Size(75, 23);
-            this.btnAddPathPoint.TabIndex = 7;
-            this.btnAddPathPoint.Text = "Add Point";
-            this.btnAddPathPoint.UseVisualStyleBackColor = true;
-            this.btnAddPathPoint.Click += new System.EventHandler(this.btnAddPathPoint_Click);
-            // 
-            // lblLLngPath
-            // 
-            this.lblLLngPath.AutoSize = true;
-            this.lblLLngPath.Location = new System.Drawing.Point(109, 32);
-            this.lblLLngPath.Name = "lblLLngPath";
-            this.lblLLngPath.Size = new System.Drawing.Size(34, 13);
-            this.lblLLngPath.TabIndex = 6;
-            this.lblLLngPath.Text = "Long:";
-            // 
-            // lblLatPath
-            // 
-            this.lblLatPath.AutoSize = true;
-            this.lblLatPath.Location = new System.Drawing.Point(6, 32);
-            this.lblLatPath.Name = "lblLatPath";
-            this.lblLatPath.Size = new System.Drawing.Size(25, 13);
-            this.lblLatPath.TabIndex = 5;
-            this.lblLatPath.Text = "Lat:";
-            // 
-            // txbxLngPath
-            // 
-            this.txbxLngPath.Enabled = false;
-            this.txbxLngPath.Location = new System.Drawing.Point(112, 48);
-            this.txbxLngPath.Name = "txbxLngPath";
-            this.txbxLngPath.Size = new System.Drawing.Size(100, 20);
-            this.txbxLngPath.TabIndex = 4;
-            // 
-            // txbxLatPath
-            // 
-            this.txbxLatPath.Enabled = false;
-            this.txbxLatPath.Location = new System.Drawing.Point(6, 48);
-            this.txbxLatPath.Name = "txbxLatPath";
-            this.txbxLatPath.Size = new System.Drawing.Size(100, 20);
-            this.txbxLatPath.TabIndex = 3;
-            // 
-            // btnPathClear
-            // 
-            this.btnPathClear.Location = new System.Drawing.Point(168, 6);
-            this.btnPathClear.Name = "btnPathClear";
-            this.btnPathClear.Size = new System.Drawing.Size(75, 23);
-            this.btnPathClear.TabIndex = 2;
-            this.btnPathClear.Text = "Clear Path";
-            this.btnPathClear.UseVisualStyleBackColor = true;
-            this.btnPathClear.Click += new System.EventHandler(this.btnPathClear_Click);
-            // 
-            // btnPathEnd
-            // 
-            this.btnPathEnd.Enabled = false;
-            this.btnPathEnd.Location = new System.Drawing.Point(87, 6);
-            this.btnPathEnd.Name = "btnPathEnd";
-            this.btnPathEnd.Size = new System.Drawing.Size(75, 23);
-            this.btnPathEnd.TabIndex = 1;
-            this.btnPathEnd.Text = "End Path";
-            this.btnPathEnd.UseVisualStyleBackColor = true;
-            this.btnPathEnd.Click += new System.EventHandler(this.btnPathEnd_Click);
-            // 
-            // btnPathBegin
-            // 
-            this.btnPathBegin.Location = new System.Drawing.Point(6, 6);
-            this.btnPathBegin.Name = "btnPathBegin";
-            this.btnPathBegin.Size = new System.Drawing.Size(75, 23);
-            this.btnPathBegin.TabIndex = 0;
-            this.btnPathBegin.Text = "Begin Path";
-            this.btnPathBegin.UseVisualStyleBackColor = true;
-            this.btnPathBegin.Click += new System.EventHandler(this.btnPathBegin_Click);
-            // 
-            // btnAddPolyPoint
-            // 
-            this.btnAddPolyPoint.Enabled = false;
-            this.btnAddPolyPoint.Location = new System.Drawing.Point(6, 74);
-            this.btnAddPolyPoint.Name = "btnAddPolyPoint";
-            this.btnAddPolyPoint.Size = new System.Drawing.Size(75, 23);
-            this.btnAddPolyPoint.TabIndex = 15;
-            this.btnAddPolyPoint.Text = "Add Point";
-            this.btnAddPolyPoint.UseVisualStyleBackColor = true;
-            this.btnAddPolyPoint.Click += new System.EventHandler(this.btnAddPolyPoint_Click);
-            // 
-            // btnPolyBegin
-            // 
-            this.btnPolyBegin.Location = new System.Drawing.Point(6, 6);
-            this.btnPolyBegin.Name = "btnPolyBegin";
-            this.btnPolyBegin.Size = new System.Drawing.Size(75, 23);
-            this.btnPolyBegin.TabIndex = 8;
-            this.btnPolyBegin.Text = "Begin Poly";
-            this.btnPolyBegin.UseVisualStyleBackColor = true;
-            this.btnPolyBegin.Click += new System.EventHandler(this.btnPolyBegin_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(109, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Long:";
-            // 
-            // btnPolyEnd
-            // 
-            this.btnPolyEnd.Enabled = false;
-            this.btnPolyEnd.Location = new System.Drawing.Point(87, 6);
-            this.btnPolyEnd.Name = "btnPolyEnd";
-            this.btnPolyEnd.Size = new System.Drawing.Size(75, 23);
-            this.btnPolyEnd.TabIndex = 9;
-            this.btnPolyEnd.Text = "End Poly";
-            this.btnPolyEnd.UseVisualStyleBackColor = true;
-            this.btnPolyEnd.Click += new System.EventHandler(this.btnPolyEnd_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 32);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(25, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Lat:";
-            // 
-            // btnPolyClear
-            // 
-            this.btnPolyClear.Location = new System.Drawing.Point(168, 6);
-            this.btnPolyClear.Name = "btnPolyClear";
-            this.btnPolyClear.Size = new System.Drawing.Size(75, 23);
-            this.btnPolyClear.TabIndex = 10;
-            this.btnPolyClear.Text = "Clear Poly";
-            this.btnPolyClear.UseVisualStyleBackColor = true;
-            this.btnPolyClear.Click += new System.EventHandler(this.btnPolyClear_Click);
-            // 
-            // txbxLngPoly
-            // 
-            this.txbxLngPoly.Enabled = false;
-            this.txbxLngPoly.Location = new System.Drawing.Point(112, 48);
-            this.txbxLngPoly.Name = "txbxLngPoly";
-            this.txbxLngPoly.Size = new System.Drawing.Size(100, 20);
-            this.txbxLngPoly.TabIndex = 12;
-            // 
-            // txbxLatPoly
-            // 
-            this.txbxLatPoly.Enabled = false;
-            this.txbxLatPoly.Location = new System.Drawing.Point(6, 48);
-            this.txbxLatPoly.Name = "txbxLatPoly";
-            this.txbxLatPoly.Size = new System.Drawing.Size(100, 20);
-            this.txbxLatPoly.TabIndex = 11;
-            // 
             // grBxPoints
             // 
             this.grBxPoints.Controls.Add(this.dGViewWaypoints);
@@ -318,6 +168,8 @@
             // 
             this.dGViewWaypoints.AllowUserToAddRows = false;
             this.dGViewWaypoints.AllowUserToDeleteRows = false;
+            this.dGViewWaypoints.AllowUserToResizeColumns = false;
+            this.dGViewWaypoints.AllowUserToResizeRows = false;
             this.dGViewWaypoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGViewWaypoints.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.WaypointNumber,
@@ -354,6 +206,224 @@
             this.Lng.HeaderText = "Long";
             this.Lng.Name = "Lng";
             this.Lng.ReadOnly = true;
+            // 
+            // tbPathControls
+            // 
+            this.tbPathControls.Controls.Add(this.tbPgFlighPath);
+            this.tbPathControls.Controls.Add(this.tbPgSurvey);
+            this.tbPathControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbPathControls.Location = new System.Drawing.Point(3, 3);
+            this.tbPathControls.Name = "tbPathControls";
+            this.tlpMain.SetRowSpan(this.tbPathControls, 3);
+            this.tbPathControls.SelectedIndex = 0;
+            this.tbPathControls.Size = new System.Drawing.Size(257, 494);
+            this.tbPathControls.TabIndex = 6;
+            // 
+            // tbPgFlighPath
+            // 
+            this.tbPgFlighPath.Controls.Add(this.lblLatPath);
+            this.tbPgFlighPath.Controls.Add(this.btnAddPathPoint);
+            this.tbPgFlighPath.Controls.Add(this.btnPathBegin);
+            this.tbPgFlighPath.Controls.Add(this.lblLLngPath);
+            this.tbPgFlighPath.Controls.Add(this.btnPathEnd);
+            this.tbPgFlighPath.Controls.Add(this.btnPathClear);
+            this.tbPgFlighPath.Controls.Add(this.txbxLngPath);
+            this.tbPgFlighPath.Controls.Add(this.txbxLatPath);
+            this.tbPgFlighPath.Location = new System.Drawing.Point(4, 22);
+            this.tbPgFlighPath.Name = "tbPgFlighPath";
+            this.tbPgFlighPath.Padding = new System.Windows.Forms.Padding(3);
+            this.tbPgFlighPath.Size = new System.Drawing.Size(249, 468);
+            this.tbPgFlighPath.TabIndex = 0;
+            this.tbPgFlighPath.Text = "Flight Path";
+            this.tbPgFlighPath.UseVisualStyleBackColor = true;
+            // 
+            // lblLatPath
+            // 
+            this.lblLatPath.AutoSize = true;
+            this.lblLatPath.Location = new System.Drawing.Point(6, 32);
+            this.lblLatPath.Name = "lblLatPath";
+            this.lblLatPath.Size = new System.Drawing.Size(25, 13);
+            this.lblLatPath.TabIndex = 5;
+            this.lblLatPath.Text = "Lat:";
+            // 
+            // btnAddPathPoint
+            // 
+            this.btnAddPathPoint.Enabled = false;
+            this.btnAddPathPoint.Location = new System.Drawing.Point(6, 74);
+            this.btnAddPathPoint.Name = "btnAddPathPoint";
+            this.btnAddPathPoint.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPathPoint.TabIndex = 7;
+            this.btnAddPathPoint.Text = "Add Point";
+            this.btnAddPathPoint.UseVisualStyleBackColor = true;
+            this.btnAddPathPoint.Click += new System.EventHandler(this.btnAddPathPoint_Click);
+            // 
+            // btnPathBegin
+            // 
+            this.btnPathBegin.Location = new System.Drawing.Point(6, 6);
+            this.btnPathBegin.Name = "btnPathBegin";
+            this.btnPathBegin.Size = new System.Drawing.Size(75, 23);
+            this.btnPathBegin.TabIndex = 0;
+            this.btnPathBegin.Text = "Begin Path";
+            this.btnPathBegin.UseVisualStyleBackColor = true;
+            this.btnPathBegin.Click += new System.EventHandler(this.btnPathBegin_Click);
+            // 
+            // lblLLngPath
+            // 
+            this.lblLLngPath.AutoSize = true;
+            this.lblLLngPath.Location = new System.Drawing.Point(109, 32);
+            this.lblLLngPath.Name = "lblLLngPath";
+            this.lblLLngPath.Size = new System.Drawing.Size(34, 13);
+            this.lblLLngPath.TabIndex = 6;
+            this.lblLLngPath.Text = "Long:";
+            // 
+            // btnPathEnd
+            // 
+            this.btnPathEnd.Enabled = false;
+            this.btnPathEnd.Location = new System.Drawing.Point(87, 6);
+            this.btnPathEnd.Name = "btnPathEnd";
+            this.btnPathEnd.Size = new System.Drawing.Size(75, 23);
+            this.btnPathEnd.TabIndex = 1;
+            this.btnPathEnd.Text = "End Path";
+            this.btnPathEnd.UseVisualStyleBackColor = true;
+            this.btnPathEnd.Click += new System.EventHandler(this.btnPathEnd_Click);
+            // 
+            // btnPathClear
+            // 
+            this.btnPathClear.Location = new System.Drawing.Point(168, 6);
+            this.btnPathClear.Name = "btnPathClear";
+            this.btnPathClear.Size = new System.Drawing.Size(75, 23);
+            this.btnPathClear.TabIndex = 2;
+            this.btnPathClear.Text = "Clear Path";
+            this.btnPathClear.UseVisualStyleBackColor = true;
+            this.btnPathClear.Click += new System.EventHandler(this.btnPathClear_Click);
+            // 
+            // txbxLngPath
+            // 
+            this.txbxLngPath.Enabled = false;
+            this.txbxLngPath.Location = new System.Drawing.Point(112, 48);
+            this.txbxLngPath.Name = "txbxLngPath";
+            this.txbxLngPath.Size = new System.Drawing.Size(100, 20);
+            this.txbxLngPath.TabIndex = 4;
+            // 
+            // txbxLatPath
+            // 
+            this.txbxLatPath.Enabled = false;
+            this.txbxLatPath.Location = new System.Drawing.Point(6, 48);
+            this.txbxLatPath.Name = "txbxLatPath";
+            this.txbxLatPath.Size = new System.Drawing.Size(100, 20);
+            this.txbxLatPath.TabIndex = 3;
+            // 
+            // tbPgSurvey
+            // 
+            this.tbPgSurvey.Controls.Add(this.label4);
+            this.tbPgSurvey.Controls.Add(this.label3);
+            this.tbPgSurvey.Controls.Add(this.nudPointSpacing);
+            this.tbPgSurvey.Controls.Add(this.nudPathSpacing);
+            this.tbPgSurvey.Controls.Add(this.btnAddPolyPoint);
+            this.tbPgSurvey.Controls.Add(this.btnPolyBegin);
+            this.tbPgSurvey.Controls.Add(this.txbxLatPoly);
+            this.tbPgSurvey.Controls.Add(this.label1);
+            this.tbPgSurvey.Controls.Add(this.txbxLngPoly);
+            this.tbPgSurvey.Controls.Add(this.btnPolyEnd);
+            this.tbPgSurvey.Controls.Add(this.btnPolyClear);
+            this.tbPgSurvey.Controls.Add(this.label2);
+            this.tbPgSurvey.Location = new System.Drawing.Point(4, 22);
+            this.tbPgSurvey.Name = "tbPgSurvey";
+            this.tbPgSurvey.Padding = new System.Windows.Forms.Padding(3);
+            this.tbPgSurvey.Size = new System.Drawing.Size(249, 468);
+            this.tbPgSurvey.TabIndex = 1;
+            this.tbPgSurvey.Text = "Survey Polygon";
+            this.tbPgSurvey.UseVisualStyleBackColor = true;
+            // 
+            // nudPointSpacing
+            // 
+            this.nudPointSpacing.Location = new System.Drawing.Point(128, 142);
+            this.nudPointSpacing.Name = "nudPointSpacing";
+            this.nudPointSpacing.Size = new System.Drawing.Size(115, 20);
+            this.nudPointSpacing.TabIndex = 17;
+            // 
+            // nudPathSpacing
+            // 
+            this.nudPathSpacing.Location = new System.Drawing.Point(6, 142);
+            this.nudPathSpacing.Name = "nudPathSpacing";
+            this.nudPathSpacing.Size = new System.Drawing.Size(115, 20);
+            this.nudPathSpacing.TabIndex = 16;
+            // 
+            // btnAddPolyPoint
+            // 
+            this.btnAddPolyPoint.Enabled = false;
+            this.btnAddPolyPoint.Location = new System.Drawing.Point(6, 74);
+            this.btnAddPolyPoint.Name = "btnAddPolyPoint";
+            this.btnAddPolyPoint.Size = new System.Drawing.Size(75, 23);
+            this.btnAddPolyPoint.TabIndex = 15;
+            this.btnAddPolyPoint.Text = "Add Point";
+            this.btnAddPolyPoint.UseVisualStyleBackColor = true;
+            this.btnAddPolyPoint.Click += new System.EventHandler(this.btnAddPolyPoint_Click);
+            // 
+            // btnPolyBegin
+            // 
+            this.btnPolyBegin.Location = new System.Drawing.Point(6, 6);
+            this.btnPolyBegin.Name = "btnPolyBegin";
+            this.btnPolyBegin.Size = new System.Drawing.Size(75, 23);
+            this.btnPolyBegin.TabIndex = 8;
+            this.btnPolyBegin.Text = "Begin Poly";
+            this.btnPolyBegin.UseVisualStyleBackColor = true;
+            this.btnPolyBegin.Click += new System.EventHandler(this.btnPolyBegin_Click);
+            // 
+            // txbxLatPoly
+            // 
+            this.txbxLatPoly.Enabled = false;
+            this.txbxLatPoly.Location = new System.Drawing.Point(6, 48);
+            this.txbxLatPoly.Name = "txbxLatPoly";
+            this.txbxLatPoly.Size = new System.Drawing.Size(100, 20);
+            this.txbxLatPoly.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(109, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Long:";
+            // 
+            // txbxLngPoly
+            // 
+            this.txbxLngPoly.Enabled = false;
+            this.txbxLngPoly.Location = new System.Drawing.Point(112, 48);
+            this.txbxLngPoly.Name = "txbxLngPoly";
+            this.txbxLngPoly.Size = new System.Drawing.Size(100, 20);
+            this.txbxLngPoly.TabIndex = 12;
+            // 
+            // btnPolyEnd
+            // 
+            this.btnPolyEnd.Enabled = false;
+            this.btnPolyEnd.Location = new System.Drawing.Point(87, 6);
+            this.btnPolyEnd.Name = "btnPolyEnd";
+            this.btnPolyEnd.Size = new System.Drawing.Size(75, 23);
+            this.btnPolyEnd.TabIndex = 9;
+            this.btnPolyEnd.Text = "End Poly";
+            this.btnPolyEnd.UseVisualStyleBackColor = true;
+            this.btnPolyEnd.Click += new System.EventHandler(this.btnPolyEnd_Click);
+            // 
+            // btnPolyClear
+            // 
+            this.btnPolyClear.Location = new System.Drawing.Point(168, 6);
+            this.btnPolyClear.Name = "btnPolyClear";
+            this.btnPolyClear.Size = new System.Drawing.Size(75, 23);
+            this.btnPolyClear.TabIndex = 10;
+            this.btnPolyClear.Text = "Clear Poly";
+            this.btnPolyClear.UseVisualStyleBackColor = true;
+            this.btnPolyClear.Click += new System.EventHandler(this.btnPolyClear_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 32);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(25, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Lat:";
             // 
             // menuStrip
             // 
@@ -438,69 +508,23 @@
             this.statLng.Size = new System.Drawing.Size(37, 17);
             this.statLng.Text = "Long:";
             // 
-            // tbPathControls
+            // label3
             // 
-            this.tbPathControls.Controls.Add(this.tbPgFlighPath);
-            this.tbPathControls.Controls.Add(this.tbPgSurvey);
-            this.tbPathControls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbPathControls.Location = new System.Drawing.Point(3, 3);
-            this.tbPathControls.Name = "tbPathControls";
-            this.tlpMain.SetRowSpan(this.tbPathControls, 3);
-            this.tbPathControls.SelectedIndex = 0;
-            this.tbPathControls.Size = new System.Drawing.Size(257, 494);
-            this.tbPathControls.TabIndex = 6;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 126);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Path Spacing";
             // 
-            // tbPgFlighPath
+            // label4
             // 
-            this.tbPgFlighPath.Controls.Add(this.lblLatPath);
-            this.tbPgFlighPath.Controls.Add(this.btnAddPathPoint);
-            this.tbPgFlighPath.Controls.Add(this.btnPathBegin);
-            this.tbPgFlighPath.Controls.Add(this.lblLLngPath);
-            this.tbPgFlighPath.Controls.Add(this.btnPathEnd);
-            this.tbPgFlighPath.Controls.Add(this.btnPathClear);
-            this.tbPgFlighPath.Controls.Add(this.txbxLngPath);
-            this.tbPgFlighPath.Controls.Add(this.txbxLatPath);
-            this.tbPgFlighPath.Location = new System.Drawing.Point(4, 22);
-            this.tbPgFlighPath.Name = "tbPgFlighPath";
-            this.tbPgFlighPath.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPgFlighPath.Size = new System.Drawing.Size(249, 218);
-            this.tbPgFlighPath.TabIndex = 0;
-            this.tbPgFlighPath.Text = "Flight Path";
-            this.tbPgFlighPath.UseVisualStyleBackColor = true;
-            // 
-            // tbPgSurvey
-            // 
-            this.tbPgSurvey.Controls.Add(this.numericUpDown2);
-            this.tbPgSurvey.Controls.Add(this.numericUpDown1);
-            this.tbPgSurvey.Controls.Add(this.btnAddPolyPoint);
-            this.tbPgSurvey.Controls.Add(this.btnPolyBegin);
-            this.tbPgSurvey.Controls.Add(this.txbxLatPoly);
-            this.tbPgSurvey.Controls.Add(this.label1);
-            this.tbPgSurvey.Controls.Add(this.txbxLngPoly);
-            this.tbPgSurvey.Controls.Add(this.btnPolyEnd);
-            this.tbPgSurvey.Controls.Add(this.btnPolyClear);
-            this.tbPgSurvey.Controls.Add(this.label2);
-            this.tbPgSurvey.Location = new System.Drawing.Point(4, 22);
-            this.tbPgSurvey.Name = "tbPgSurvey";
-            this.tbPgSurvey.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPgSurvey.Size = new System.Drawing.Size(249, 468);
-            this.tbPgSurvey.TabIndex = 1;
-            this.tbPgSurvey.Text = "Survey Polygon";
-            this.tbPgSurvey.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(6, 142);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(115, 20);
-            this.numericUpDown1.TabIndex = 16;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(128, 142);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(115, 20);
-            this.numericUpDown2.TabIndex = 17;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(125, 126);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(73, 13);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Point Spacing";
             // 
             // frmMain
             // 
@@ -520,17 +544,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).EndInit();
             this.grBxPoints.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dGViewWaypoints)).EndInit();
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.tbPathControls.ResumeLayout(false);
             this.tbPgFlighPath.ResumeLayout(false);
             this.tbPgFlighPath.PerformLayout();
             this.tbPgSurvey.ResumeLayout(false);
             this.tbPgSurvey.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPointSpacing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPathSpacing)).EndInit();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -576,8 +600,10 @@
         private System.Windows.Forms.TabControl tbPathControls;
         private System.Windows.Forms.TabPage tbPgFlighPath;
         private System.Windows.Forms.TabPage tbPgSurvey;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nudPointSpacing;
+        private System.Windows.Forms.NumericUpDown nudPathSpacing;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
 
 
 

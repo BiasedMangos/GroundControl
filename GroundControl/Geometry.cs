@@ -20,6 +20,8 @@ namespace GroundControl
 
         public double GetAngle(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y)
         {
+            //not actually used in program as creates errors when measuring angles that cross the boundary conditions
+
             //finds the angle between 3 points by finding the slope of each set of 2 points
             //with p2 as the common centre point
             //then calculating the difference in slope
@@ -113,7 +115,7 @@ namespace GroundControl
         }
 
 
-        bool PointOnLine(PointLatLng pointP, PointLatLng pointL1, PointLatLng pointL2)
+        public bool PointOnLine(PointLatLng pointP, PointLatLng pointL1, PointLatLng pointL2)
         {
             double dFudge = 0.000001;       // This is used to avoid rounding errors causing false positives
             double dLngMax = Math.Max(pointL1.Lng, pointL2.Lng) - dFudge;
@@ -126,7 +128,7 @@ namespace GroundControl
         }
 
 
-        int LineIntersect(PointLatLng point11, PointLatLng point12, PointLatLng point21, PointLatLng point22, ref PointLatLng pointInt)
+        public int LineIntersect(PointLatLng point11, PointLatLng point12, PointLatLng point21, PointLatLng point22, ref PointLatLng pointInt)
         {
             double a1, b1, c1, a2, b2, c2;
             double d;
@@ -161,7 +163,7 @@ namespace GroundControl
             return (1 + (bInside1 ? 1 : 0) + (bInside2 ? 2 : 0));
         }
 
-        bool LineIntersectPoly(List<PointLatLng> lPoints, PointLatLng point1, PointLatLng point2)
+        public bool LineIntersectPoly(List<PointLatLng> lPoints, PointLatLng point1, PointLatLng point2)
         {
             PointLatLng pointInt = new PointLatLng();
             for (int i = 0; i < lPoints.Count; i++)
@@ -172,6 +174,23 @@ namespace GroundControl
                     return true;
             }
             return false;
+        }
+        public RectLatLng GetBoundingBox(List<PointLatLng> lPoints)
+        {
+            double dYMax = lPoints[0].Lat, dYMin = lPoints[0].Lat, dXMax = lPoints[0].Lng, dXMin = lPoints[0].Lng;
+            
+
+            foreach (PointLatLng point in lPoints)
+            {
+                dYMax = Math.Max(dYMax, point.Lat);
+                dYMin = Math.Min(dYMin, point.Lat);
+                dXMax = Math.Max(dXMax, point.Lng);
+                dXMin = Math.Min(dXMin, point.Lng);
+            }
+
+            RectLatLng rect = new RectLatLng(dYMax, dXMin, dXMax - dXMin, dYMax - dYMin);
+            return rect;
+            
         }
     }
 }

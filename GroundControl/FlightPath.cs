@@ -7,25 +7,37 @@ using System.IO;
 using System.Drawing;
 using GMap.NET;
 
-
 //class that contains algorithms and functions for creating and manipulating. flight paths
 namespace GroundControl
 {
     class FlightPath
     {
+        Geometry Geometry;
         public FlightPath()
         {
-            
+            Geometry = new Geometry();   
         }
 
         public void GenerateSurvey(List<PointLatLng> lPointsPoly, List<PointLatLng> lPointsConvexHull, List<PointLatLng> lPointsPath, double dPathSpacing, double dPointSpacing, double dAngle)
         {
             lPointsPath.Clear();
+            RectLatLng rect = Geometry.GetBoundingBox(lPointsConvexHull);
+            double dRadius = Math.Sqrt(Math.Pow((rect.Right - rect.Left), 2) + Math.Pow((rect.Top - rect.Bottom), 2))/2; //pythagoras
 
-            foreach (PointLatLng point in lPointsConvexHull)
+
+
+
+            lPointsPath.Add(rect.LocationTopLeft);
+            lPointsPath.Add(rect.LocationRightBottom);
+            lPointsPath.Add(rect.LocationMiddle);
+            lPointsPath.Add(new PointLatLng(rect.LocationMiddle.Lat + dRadius, rect.LocationMiddle.Lng));
+
+
+
+            /*foreach (PointLatLng point in lPointsConvexHull)
             {
                 lPointsPath.Add(point);
-            }
+            }*/
         }
 
         public void ImportFromText(string sFile)

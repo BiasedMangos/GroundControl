@@ -111,8 +111,10 @@ namespace GroundControl
         private void updateTable()
         {
             //displays waypoint coordinates for flight path in table
-            int iNoOfRows = lPointsPath.Count - dGViewWaypoints.Rows.Count;
-            dGViewWaypoints.Rows.Add(iNoOfRows);
+
+            dGViewWaypoints.Rows.Clear();
+            if (lPointsPath.Count > 0)
+                 dGViewWaypoints.Rows.Add(lPointsPath.Count);
             for (int i = 0; i < lPointsPath.Count; i++)
             {
                 dGViewWaypoints.Rows[i].Cells[0].Value = (i + 1).ToString();
@@ -142,6 +144,18 @@ namespace GroundControl
                 GMarkerGoogle newMarker = new GMarkerGoogle(lPointsPath[lPointsPath.Count - 2], GMarkerGoogleType.gray_small);
                 MarkerOverlay.Markers.Add(newMarker);
             }
+        }
+        public void addPathMarkers()
+        {
+            GMarkerGoogle newMarker = new GMarkerGoogle(lPointsPath[0], GMarkerGoogleType.green);
+            MarkerOverlay.Markers.Add(newMarker);
+            for (int i = 1; i < lPointsPath.Count - 1; i++)
+            {
+                newMarker = new GMarkerGoogle(lPointsPath[i], GMarkerGoogleType.gray_small);
+                MarkerOverlay.Markers.Add(newMarker);
+            }
+            newMarker = new GMarkerGoogle(lPointsPath[lPointsPath.Count - 1], GMarkerGoogleType.red);
+            MarkerOverlay.Markers.Add(newMarker);
         }
         private void RenderPath()
         {
@@ -173,8 +187,17 @@ namespace GroundControl
             txbxLngPath.Enabled = false;
             btnAddPathPoint.Enabled = false;
         }
+        private void clearPath()
+        {
+            endPath();
+            PathOverlay.Clear();
+            lPointsPath.Clear();
+            MarkerOverlay.Clear();
+            dGViewWaypoints.Rows.Clear();
+        }
         private void btnPathBegin_Click(object sender, EventArgs e)
         {
+            clearPath();
             beginPath();
         }
         private void btnPathEnd_Click(object sender, EventArgs e)
@@ -189,11 +212,7 @@ namespace GroundControl
         }
         private void btnPathClear_Click(object sender, EventArgs e)
         {
-            endPath();
-            PathOverlay.Clear();
-            lPointsPath.Clear();
-            MarkerOverlay.Clear();
-            dGViewWaypoints.Rows.Clear();
+            clearPath();
         }
         private void btnAddPathPoint_Click(object sender, EventArgs e)
         {
@@ -239,8 +258,17 @@ namespace GroundControl
             lPointsConvexHull = new List<PointLatLng>(lPointsPoly);
             Geometry.ConvexHull(lPointsConvexHull);
         }
+        private void clearPoly()
+        {
+            endPoly();
+            PolyOverlay.Clear();
+            lPointsPoly.Clear();
+            lPointsConvexHull.Clear();
+        }
         private void btnPolyBegin_Click(object sender, EventArgs e)
         {
+            clearPath();
+            clearPoly();
             beginPoly();
         }
         private void btnPolyEnd_Click(object sender, EventArgs e)
@@ -253,15 +281,12 @@ namespace GroundControl
 
             FlightPath.GenerateSurvey(lPointsPoly, lPointsConvexHull, lPointsPath, 0, 0, 0);
             foreach (PointLatLng point in lPointsPath)
-                addPathMarker(point);
+                addPathMarkers();
             RenderPath();
         }
         private void btnPolyClear_Click(object sender, EventArgs e)
         {
-            endPoly();
-            PolyOverlay.Clear();
-            lPointsPoly.Clear();
-            lPointsConvexHull.Clear();
+            clearPoly();
         }
         private void btnAddPolyPoint_Click(object sender, EventArgs e)
         {
