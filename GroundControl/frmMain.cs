@@ -165,6 +165,16 @@ namespace GroundControl
             updateTable();
         }
 
+        private void GenerateSurvey()
+        {
+            MarkerOverlay.Clear();
+
+            FlightPath.GenerateSurvey(lPointsPoly, lPointsConvexHull, lPointsPath, (double)nudPathSpacing.Value, (double)nudPointSpacing.Value, tbrPathAngle.Value * (Math.PI/15));
+            foreach (PointLatLng point in lPointsPath)
+                addPathMarkers();
+            RenderPath();
+        }
+
         private void beginPath()
         {
             //enables all buttons and textboxes necessary for creating a path 
@@ -279,10 +289,7 @@ namespace GroundControl
             PolyOverlay.Clear();
             PolyOverlay.Polygons.Add(poly);
 
-            FlightPath.GenerateSurvey(lPointsPoly, lPointsConvexHull, lPointsPath, 0, 0, 0);
-            foreach (PointLatLng point in lPointsPath)
-                addPathMarkers();
-            RenderPath();
+            GenerateSurvey();
         }
         private void btnPolyClear_Click(object sender, EventArgs e)
         {
@@ -326,6 +333,11 @@ namespace GroundControl
         }
 
         #endregion
+
+        private void nudPathSpacing_ValueChanged(object sender, EventArgs e)
+        {
+            GenerateSurvey();
+        }
 
 
 

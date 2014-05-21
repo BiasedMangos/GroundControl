@@ -20,18 +20,44 @@ namespace GroundControl
 
         public void GenerateSurvey(List<PointLatLng> lPointsPoly, List<PointLatLng> lPointsConvexHull, List<PointLatLng> lPointsPath, double dPathSpacing, double dPointSpacing, double dAngle)
         {
+            //path spacing will be input in metres but algorithm works in degrees
+            //for now a fudge multip[lier will get it close when at the equator
+            dPathSpacing = dPathSpacing * 0.01;
+            dPointSpacing = dPointSpacing * 0.01;
+
             lPointsPath.Clear();
             RectLatLng rect = Geometry.GetBoundingBox(lPointsConvexHull);
             double dRadius = Math.Sqrt(Math.Pow((rect.Right - rect.Left), 2) + Math.Pow((rect.Top - rect.Bottom), 2))/2; //pythagoras
 
+            PointLatLng point1 = new PointLatLng(rect.LocationMiddle.Lat + (dRadius * Math.Sin(dAngle)), rect.LocationMiddle.Lng + (dRadius * Math.Cos(dAngle)));
+            PointLatLng point2 = new PointLatLng(rect.LocationMiddle.Lat - (dRadius * Math.Sin(dAngle)), rect.LocationMiddle.Lng - (dRadius * Math.Cos(dAngle)));
 
+            
 
+            double dPathOffsetX = dPathSpacing * Math.Cos(dAngle + Math.PI/2);
+            double dPathOffsetY = dPathSpacing * Math.Sin(dAngle + Math.PI/2);
 
-            lPointsPath.Add(rect.LocationTopLeft);
+            int iNumLines2 = (int)(dRadius / dPathSpacing);
+
+            for (int i = -iNumLines2; i < iNumLines2; i++)
+            {
+                if ((i % 2) == 0)
+                {
+                    lPointsPath.Add(new PointLatLng(point1.Lat + i * dPathOffsetY, point1.Lng + i * dPathOffsetX));
+                    lPointsPath.Add(new PointLatLng(point2.Lat + i * dPathOffsetY, point2.Lng + i * dPathOffsetX));
+                }
+                else
+                {
+                    lPointsPath.Add(new PointLatLng(point2.Lat + i * dPathOffsetY, point2.Lng + i * dPathOffsetX));
+                    lPointsPath.Add(new PointLatLng(point1.Lat + i * dPathOffsetY, point1.Lng + i * dPathOffsetX));
+                }
+            }
+
+            /*lPointsPath.Add(rect.LocationTopLeft);
             lPointsPath.Add(rect.LocationRightBottom);
             lPointsPath.Add(rect.LocationMiddle);
             lPointsPath.Add(new PointLatLng(rect.LocationMiddle.Lat + dRadius, rect.LocationMiddle.Lng));
-
+            */
 
 
             /*foreach (PointLatLng point in lPointsConvexHull)
