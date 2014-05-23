@@ -20,10 +20,14 @@ namespace GroundControl
 
         public void GenerateSurvey(List<PointLatLng> lPointsPoly, List<PointLatLng> lPointsConvexHull, List<PointLatLng> lPointsPath, double dPathSpacing, double dPointSpacing, double dAngle)
         {
+            //checks that we have a valid survey polygon
+            if (lPointsConvexHull.Count < 3)
+                return;
+
             //path spacing will be input in metres but algorithm works in degrees
             //for now a fudge multip[lier will get it close when at the equator
-            dPathSpacing = dPathSpacing * 0.01;
-            dPointSpacing = dPointSpacing * 0.01;
+            dPathSpacing = dPathSpacing * 0.00001;
+            dPointSpacing = dPointSpacing * 0.00001;
 
             lPointsPath.Clear();
             RectLatLng rect = Geometry.GetBoundingBox(lPointsConvexHull);
@@ -32,7 +36,8 @@ namespace GroundControl
             PointLatLng point1 = new PointLatLng(rect.LocationMiddle.Lat + (dRadius * Math.Sin(dAngle)), rect.LocationMiddle.Lng + (dRadius * Math.Cos(dAngle)));
             PointLatLng point2 = new PointLatLng(rect.LocationMiddle.Lat - (dRadius * Math.Sin(dAngle)), rect.LocationMiddle.Lng - (dRadius * Math.Cos(dAngle)));
 
-            
+            PointLatLng pStart = new PointLatLng();
+            PointLatLng pEnd = new PointLatLng();
 
             double dPathOffsetX = dPathSpacing * Math.Cos(dAngle + Math.PI/2);
             double dPathOffsetY = dPathSpacing * Math.Sin(dAngle + Math.PI/2);
@@ -41,15 +46,22 @@ namespace GroundControl
 
             for (int i = -iNumLines2; i < iNumLines2; i++)
             {
-                if ((i % 2) == 0)
+                pStart.Lat = point1.Lat + i * dPathOffsetY;
+                pStart.Lng = point1.Lng + i * dPathOffsetX;
+                pEnd.Lat = point2.Lat + i * dPathOffsetY;
+                pEnd.Lng = point2.Lng + i * dPathOffsetX;
+                if (ClipLineToPoly(lPointsPoly, ref pStart, ref pEnd) == 1)
                 {
-                    lPointsPath.Add(new PointLatLng(point1.Lat + i * dPathOffsetY, point1.Lng + i * dPathOffsetX));
-                    lPointsPath.Add(new PointLatLng(point2.Lat + i * dPathOffsetY, point2.Lng + i * dPathOffsetX));
-                }
-                else
-                {
-                    lPointsPath.Add(new PointLatLng(point2.Lat + i * dPathOffsetY, point2.Lng + i * dPathOffsetX));
-                    lPointsPath.Add(new PointLatLng(point1.Lat + i * dPathOffsetY, point1.Lng + i * dPathOffsetX));
+                    if ((i % 2) == 0)
+                    {
+                        lPointsPath.Add(pStart);
+                        lPointsPath.Add(pEnd);
+                    }
+                    else
+                    {
+                        lPointsPath.Add(pEnd);
+                        lPointsPath.Add(pStart);
+                    }
                 }
             }
 
@@ -65,6 +77,35 @@ namespace GroundControl
                 lPointsPath.Add(point);
             }*/
         }
+        public int ClipLineToPoly(List<PointLatLng> lPoints, ref PointLatLng point1, ref PointLatLng point2)
+        {
+            PointLatLng pointInt = new PointLatLng();
+            List<PointLatLng> lIntersections = new List<PointLatLng>();
+            for (int i = 0; i < lPoints.Count; i++)
+            {
+                int i1 = i;
+                int i2 = (i + 1) % lPoints.Count;
+                if (Geometry.LineIntersect(lPoints[i1], lPoints[i2], point1, point2, ref pointInt) == 4)
+                    lIntersections.Add(pointInt);
+            }
+
+            if (lIntersections.Count < 2)
+                return 0;
+            else
+            {
+                lIntersections.Sort(
+                    delegate(PointLatLng p1, PointLatLng p2)
+                    {
+                        return p1.Lat.CompareTo(p2.Lat);
+                    }
+                );
+                point1 = lIntersections[0];
+                point2 = lIntersections[lIntersections.Count - 1];
+                return 1;
+            }
+        }
+
+        
 
         public void ImportFromText(string sFile)
         {

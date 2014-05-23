@@ -21,7 +21,7 @@ namespace GroundControl
     {
         int iMaxZoom = 22;
         int iMinZoom = 3;
-        int iStartZoom = 13;
+        int iStartZoom = 17;
 
         FlightPath FlightPath;
         Geometry Geometry;
@@ -73,7 +73,8 @@ namespace GroundControl
 
             //initializes lists of points used for paths and polygons
             lPointsPath = new List<PointLatLng>();
-            lPointsPoly = new List<PointLatLng>(); 
+            lPointsPoly = new List<PointLatLng>();
+            lPointsConvexHull = new List<PointLatLng>();
         }
 
 
@@ -169,7 +170,7 @@ namespace GroundControl
         {
             MarkerOverlay.Clear();
 
-            FlightPath.GenerateSurvey(lPointsPoly, lPointsConvexHull, lPointsPath, (double)nudPathSpacing.Value, (double)nudPointSpacing.Value, tbrPathAngle.Value * (Math.PI/15));
+            FlightPath.GenerateSurvey(lPointsPoly, lPointsConvexHull, lPointsPath, (double)nudPathSpacing.Value, (double)nudPointSpacing.Value, (90 - (double)nudPathAngle.Value) * (Math.PI/180));
             foreach (PointLatLng point in lPointsPath)
                 addPathMarkers();
             RenderPath();
@@ -339,7 +340,14 @@ namespace GroundControl
             GenerateSurvey();
         }
 
+        private void nudPointSpacing_ValueChanged(object sender, EventArgs e)
+        {
+            GenerateSurvey();
+        }
 
-
+        private void nudPathAngle_ValueChanged(object sender, EventArgs e)
+        {
+            GenerateSurvey();
+        }
     }
 }

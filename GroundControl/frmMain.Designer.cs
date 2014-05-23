@@ -47,6 +47,7 @@
             this.txbxLngPath = new System.Windows.Forms.TextBox();
             this.txbxLatPath = new System.Windows.Forms.TextBox();
             this.tbPgSurvey = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.nudPointSpacing = new System.Windows.Forms.NumericUpDown();
@@ -70,8 +71,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statLat = new System.Windows.Forms.ToolStripStatusLabel();
             this.statLng = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tbrPathAngle = new System.Windows.Forms.TrackBar();
-            this.label5 = new System.Windows.Forms.Label();
+            this.nudPathAngle = new System.Windows.Forms.NumericUpDown();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).BeginInit();
             this.grBxPoints.SuspendLayout();
@@ -83,7 +83,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudPathSpacing)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbrPathAngle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPathAngle)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -318,8 +318,8 @@
             // 
             // tbPgSurvey
             // 
+            this.tbPgSurvey.Controls.Add(this.nudPathAngle);
             this.tbPgSurvey.Controls.Add(this.label5);
-            this.tbPgSurvey.Controls.Add(this.tbrPathAngle);
             this.tbPgSurvey.Controls.Add(this.label4);
             this.tbPgSurvey.Controls.Add(this.label3);
             this.tbPgSurvey.Controls.Add(this.nudPointSpacing);
@@ -339,6 +339,15 @@
             this.tbPgSurvey.TabIndex = 1;
             this.tbPgSurvey.Text = "Survey Polygon";
             this.tbPgSurvey.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 199);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Path Angle";
             // 
             // label4
             // 
@@ -360,36 +369,45 @@
             // 
             // nudPointSpacing
             // 
-            this.nudPointSpacing.DecimalPlaces = 1;
-            this.nudPointSpacing.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
             this.nudPointSpacing.Location = new System.Drawing.Point(128, 142);
+            this.nudPointSpacing.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.nudPointSpacing.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.nudPointSpacing.Name = "nudPointSpacing";
             this.nudPointSpacing.Size = new System.Drawing.Size(115, 20);
             this.nudPointSpacing.TabIndex = 17;
             this.nudPointSpacing.Value = new decimal(new int[] {
-            1,
+            25,
             0,
             0,
             0});
+            this.nudPointSpacing.ValueChanged += new System.EventHandler(this.nudPointSpacing_ValueChanged);
             // 
             // nudPathSpacing
             // 
-            this.nudPathSpacing.DecimalPlaces = 1;
-            this.nudPathSpacing.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
             this.nudPathSpacing.Location = new System.Drawing.Point(6, 142);
+            this.nudPathSpacing.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.nudPathSpacing.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.nudPathSpacing.Name = "nudPathSpacing";
             this.nudPathSpacing.Size = new System.Drawing.Size(115, 20);
             this.nudPathSpacing.TabIndex = 16;
             this.nudPathSpacing.Value = new decimal(new int[] {
-            1,
+            50,
             0,
             0,
             0});
@@ -554,23 +572,23 @@
             this.statLng.Size = new System.Drawing.Size(37, 17);
             this.statLng.Text = "Long:";
             // 
-            // tbrPathAngle
+            // nudPathAngle
             // 
-            this.tbrPathAngle.BackColor = System.Drawing.Color.White;
-            this.tbrPathAngle.Location = new System.Drawing.Point(6, 215);
-            this.tbrPathAngle.Maximum = 30;
-            this.tbrPathAngle.Name = "tbrPathAngle";
-            this.tbrPathAngle.Size = new System.Drawing.Size(237, 45);
-            this.tbrPathAngle.TabIndex = 20;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 199);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 13);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Path Angle";
+            this.nudPathAngle.Location = new System.Drawing.Point(6, 215);
+            this.nudPathAngle.Maximum = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            this.nudPathAngle.Minimum = new decimal(new int[] {
+            90,
+            0,
+            0,
+            -2147483648});
+            this.nudPathAngle.Name = "nudPathAngle";
+            this.nudPathAngle.Size = new System.Drawing.Size(115, 20);
+            this.nudPathAngle.TabIndex = 22;
+            this.nudPathAngle.ValueChanged += new System.EventHandler(this.nudPathAngle_ValueChanged);
             // 
             // frmMain
             // 
@@ -601,7 +619,7 @@
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbrPathAngle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPathAngle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -652,7 +670,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TrackBar tbrPathAngle;
+        private System.Windows.Forms.NumericUpDown nudPathAngle;
 
 
 

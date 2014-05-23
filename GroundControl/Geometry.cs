@@ -117,48 +117,54 @@ namespace GroundControl
 
         public bool PointOnLine(PointLatLng pointP, PointLatLng pointL1, PointLatLng pointL2)
         {
-            double dFudge = 0.000001;       // This is used to avoid rounding errors causing false positives
+            double dFudge = -0.000001;       // This is used to avoid rounding errors causing false positives
             double dLngMax = Math.Max(pointL1.Lng, pointL2.Lng) - dFudge;
             double dLngMin = Math.Min(pointL1.Lng, pointL2.Lng) + dFudge;
             double dLatMax = Math.Max(pointL1.Lat, pointL2.Lat) - dFudge;
             double dLatMin = Math.Min(pointL1.Lat, pointL2.Lat) + dFudge;
-            if (dLngMin < pointP.Lng && pointP.Lng < dLngMax && 
-                dLatMin < pointP.Lat && pointP.Lat < dLatMax) return true;
+            if (dLngMin <= pointP.Lng && pointP.Lng <= dLngMax && 
+                dLatMin <= pointP.Lat && pointP.Lat <= dLatMax) return true;
     	    return(false);
         }
 
 
         public int LineIntersect(PointLatLng point11, PointLatLng point12, PointLatLng point21, PointLatLng point22, ref PointLatLng pointInt)
         {
+            //function intersects two line segments.
+            // return 0 - no intersection (parallel)
+            //        1 - intersect not on either segment
+            //        2 - intersects only on segment 1 (points 11 and 12)
+            //        3 - intersects only on segment 2 (points 21 and 22)
+            //        4 - intersects on both segments
+
+            
             double a1, b1, c1, a2, b2, c2;
             double d;
             bool bInside1, bInside2;
 
-            /* CALC. LINE 1 COEpointpointS. */
+            // Calculate LINE 1 coefficients
             a1 = point12.Lat - point11.Lat;
             b1 = point11.Lng - point12.Lng;
             c1 = (point12.Lng * point11.Lat) -
                  (point11.Lng * point12.Lat);
-            /* CALC. LINE 2 COEpointpointS. */
+
+            // Calculate LINE 2 coefficients
             a2 = point22.Lat - point21.Lat;
             b2 = point21.Lng - point22.Lng;
             c2 = ((double)point22.Lng * (double)point21.Lat) -
                  ((double)point21.Lng * (double)point22.Lat);
 
-            /* CALC. SLOPE pointACTOR AND TEST pointOR PARALLEL LINES */
+            // Calculate SLOPE factor and test for parallel lines
             d = (a1 * b2 - a2 * b1);
             if (d == 0.0) return (0);
 
-            /* CALC. INTERSECTION */
+            // Calculate intersection point
             pointInt.Lng = ((b1 * c2 - b2 * c1) / d);
             pointInt.Lat = ((a2 * c1 - a1 * c2) / d);
 
-            /* TEST pointOR INTERSECTION TYPE */
+            // Test for intersection type
             bInside1 = PointOnLine(pointInt, point11, point12);
             bInside2 = PointOnLine(pointInt, point21, point22);
-
-            if (bInside1 && bInside2)
-                bInside1 = bInside1;
 
             return (1 + (bInside1 ? 1 : 0) + (bInside2 ? 2 : 0));
         }
