@@ -105,6 +105,23 @@ namespace GroundControl
             }
         }
 
+        public double getDistanceFromLatLonInKm(double dLat1, double dLon1, double dLat2, double dLon2) 
+        {
+            var R = 6367444; // average Radius of the earth in metres, will give a close enough approximation for our purpose
+            var dLat = deg2rad(dLat2 - dLat1);  // deg2rad below
+            var dLon = deg2rad(dLon2 - dLon1); 
+            var a = 
+                Math.Sin(dLat/2) * Math.Sin(dLat/2) +
+                Math.Cos(deg2rad(dLat1)) * Math.Cos(deg2rad(dLat2)) * 
+                Math.Sin(dLon/2) * Math.Sin(dLon/2); 
+            var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1-a)); 
+            double d = R * c; // Distance in km
+            return d;
+        }
+        public double deg2rad(double dDeg) 
+        {
+            return dDeg * (Math.PI/180);
+        }
         
 
         public void ImportFromText(string sFile)
