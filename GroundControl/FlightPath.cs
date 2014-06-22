@@ -93,15 +93,30 @@ namespace GroundControl
                 return 0;
             else
             {
-                lIntersections.Sort(
-                    delegate(PointLatLng p1, PointLatLng p2)
-                    {
-                        return p1.Lat.CompareTo(p2.Lat);
-                    }
-                );
-                point1 = lIntersections[0];
-                point2 = lIntersections[lIntersections.Count - 1];
-                return 1;
+                if (point1.Lat != point2.Lat)
+                {
+                    lIntersections.Sort(
+                        delegate(PointLatLng p1, PointLatLng p2)
+                        {
+                            return p1.Lat.CompareTo(p2.Lat);
+                        }
+                    );
+                    point1 = lIntersections[0];
+                    point2 = lIntersections[lIntersections.Count - 1];
+                    return 1;
+                }
+                else
+                {
+                    lIntersections.Sort(
+                        delegate(PointLatLng p1, PointLatLng p2)
+                        {
+                            return p1.Lng.CompareTo(p2.Lng);
+                        }
+                    );
+                    point1 = lIntersections[0];
+                    point2 = lIntersections[lIntersections.Count - 1];
+                    return 1;
+                }
             }
         }
 
@@ -126,7 +141,7 @@ namespace GroundControl
 
         public void ImportFromText(string sFile)
         {
-
+            //currently placeholder, not certain if this is a necessary functino
         }
         public void ExportToText(List<PointLatLng> lPoints, string sFile)
         {
