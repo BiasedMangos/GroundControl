@@ -38,8 +38,6 @@ namespace GroundControl
         enum mode { idle, path, poly }
         mode drawingMode;
 
-        DataTable dtWaypoint;
-
         public frmMain()
         {
             InitializeComponent();
@@ -77,13 +75,6 @@ namespace GroundControl
             lPointsPath = new List<PointLatLng>();
             lPointsPoly = new List<PointLatLng>();
             lPointsConvexHull = new List<PointLatLng>();
-
-            //dtWaypoint = new DataTable();
-            //dtWaypoint.Columns.Add("No.", typeof(int));
-            //dtWaypoint.Columns.Add("Lat", typeof(double));
-            //dtWaypoint.Columns.Add("Lng", typeof(double));
-            //dGViewWaypoints.DataSource = dtWaypoint;
-            //dGViewWaypoints.EditMode = DataGridViewEditMode.EditOnEnter;
         }
 
 
@@ -121,6 +112,7 @@ namespace GroundControl
         private void updateTable()
         {
             //displays waypoint coordinates for flight path in table
+
             dGViewWaypoints.Rows.Clear();
             if (lPointsPath.Count > 0)
                  dGViewWaypoints.Rows.Add(lPointsPath.Count);
@@ -130,13 +122,6 @@ namespace GroundControl
                 dGViewWaypoints.Rows[i].Cells[1].Value = lPointsPath[i].Lat.ToString();
                 dGViewWaypoints.Rows[i].Cells[2].Value = lPointsPath[i].Lng.ToString();
             }
-            /*dtWaypoint.Rows.Clear();
-            if (lPointsPath.Count > 0)
-                dtWaypoint.Rows.Add(lPointsPath.Count);
-            for (int i = 0; i < lPointsPath.Count; i++)
-            {
-                dtWaypoint.Rows.Add(10, 20, 6);
-            }*/
         }
 
         private void addPointToPath(PointLatLng point)
