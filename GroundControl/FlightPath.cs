@@ -52,26 +52,29 @@ namespace GroundControl
                 pEnd.Lng = point2.Lng + i * dPathOffsetX;
                 if (ClipLineToPoly(lPointsPoly, ref pStart, ref pEnd) == 1)
                 {
-                    if ((i % 2) == 0)
+                    if ((i % 2) == 0) //  reverses direction of every second pass of the flight path to create a zig zag pattern
                     {
-                        lPointsPath.Add(pStart);
+                        fillSegment(pStart, pEnd, dPointSpacing, lPointsPath);
+                        //lPointsPath.Add(pStart);
                         lPointsPath.Add(pEnd);
                     }
                     else
                     {
-                        lPointsPath.Add(pEnd);
+                        fillSegment(pEnd, pStart, dPointSpacing, lPointsPath);
+                        //lPointsPath.Add(pEnd);
                         lPointsPath.Add(pStart);
                     }
                 }
             }
 
+            //test stub designed to display output of bounding box algorithm
             /*lPointsPath.Add(rect.LocationTopLeft);
             lPointsPath.Add(rect.LocationRightBottom);
             lPointsPath.Add(rect.LocationMiddle);
             lPointsPath.Add(new PointLatLng(rect.LocationMiddle.Lat + dRadius, rect.LocationMiddle.Lng));
             */
 
-
+            //test stub designed to easily display output of convex hull algorithm (no longer used)
             /*foreach (PointLatLng point in lPointsConvexHull)
             {
                 lPointsPath.Add(point);
@@ -137,7 +140,19 @@ namespace GroundControl
         {
             return dDeg * (Math.PI/180);
         }
-        
+
+        public void fillSegment( PointLatLng pStart, PointLatLng pEnd, double dPointSpacing, List<PointLatLng> lPointsPath)
+        {
+            double dAngle = Math.Atan2(pEnd.Lat - pStart.Lat, pEnd.Lng - pStart.Lng);
+
+            double dPointOffsetLat = dPointSpacing * Math.Sin(dAngle);
+            double dPointOffsetLng = dPointSpacing * Math.Cos(dAngle);
+            for (int i = 0; i < 10; i++)
+            {
+                lPointsPath.Add(new PointLatLng(pStart.Lat + i * dPointOffsetLat, pStart.Lng + i * dPointOffsetLng));
+            }
+        }
+
 
         public void ImportFromText(string sFile)
         {

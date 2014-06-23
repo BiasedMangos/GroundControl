@@ -111,8 +111,8 @@ namespace GroundControl
 
         private void updateTable()
         {
-            //displays waypoint coordinates for flight path in table
-
+            //clears and repopulates table
+            //to display waypoint coordinates for flight path in table
             dGViewWaypoints.Rows.Clear();
             if (lPointsPath.Count > 0)
                  dGViewWaypoints.Rows.Add(lPointsPath.Count);
@@ -318,6 +318,12 @@ namespace GroundControl
             {
                 FlightPath.ExportToText(lPointsPath, dialog.FileName.ToString());
             }
+        }
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clearPath();
+            clearPoly();
+            updateTable();
         }
 
         //handles pan, zoom, and all other options related to displaying map
