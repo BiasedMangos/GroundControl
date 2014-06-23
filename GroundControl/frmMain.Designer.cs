@@ -33,9 +33,6 @@
             this.trBarZoom = new System.Windows.Forms.TrackBar();
             this.grBxPoints = new System.Windows.Forms.GroupBox();
             this.dGViewWaypoints = new System.Windows.Forms.DataGridView();
-            this.WaypointNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lng = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbPathControls = new System.Windows.Forms.TabControl();
             this.tbPgFlighPath = new System.Windows.Forms.TabPage();
             this.lblLatPath = new System.Windows.Forms.Label();
@@ -47,6 +44,7 @@
             this.txbxLngPath = new System.Windows.Forms.TextBox();
             this.txbxLatPath = new System.Windows.Forms.TextBox();
             this.tbPgSurvey = new System.Windows.Forms.TabPage();
+            this.nudPathAngle = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,15 +61,14 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statLat = new System.Windows.Forms.ToolStripStatusLabel();
             this.statLng = new System.Windows.Forms.ToolStripStatusLabel();
-            this.nudPathAngle = new System.Windows.Forms.NumericUpDown();
+            this.WaypointNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lng = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).BeginInit();
             this.grBxPoints.SuspendLayout();
@@ -79,11 +76,11 @@
             this.tbPathControls.SuspendLayout();
             this.tbPgFlighPath.SuspendLayout();
             this.tbPgSurvey.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPathAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPointSpacing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPathSpacing)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPathAngle)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -181,34 +178,10 @@
             this.dGViewWaypoints.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dGViewWaypoints.Location = new System.Drawing.Point(3, 16);
             this.dGViewWaypoints.Name = "dGViewWaypoints";
-            this.dGViewWaypoints.ReadOnly = true;
             this.dGViewWaypoints.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dGViewWaypoints.RowHeadersVisible = false;
             this.dGViewWaypoints.Size = new System.Drawing.Size(255, 665);
             this.dGViewWaypoints.TabIndex = 0;
-            // 
-            // WaypointNumber
-            // 
-            this.WaypointNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.WaypointNumber.HeaderText = "No.";
-            this.WaypointNumber.Name = "WaypointNumber";
-            this.WaypointNumber.ReadOnly = true;
-            this.WaypointNumber.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.WaypointNumber.Width = 49;
-            // 
-            // Lat
-            // 
-            this.Lat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Lat.HeaderText = "Lat";
-            this.Lat.Name = "Lat";
-            this.Lat.ReadOnly = true;
-            // 
-            // Lng
-            // 
-            this.Lng.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Lng.HeaderText = "Long";
-            this.Lng.Name = "Lng";
-            this.Lng.ReadOnly = true;
             // 
             // tbPathControls
             // 
@@ -339,6 +312,24 @@
             this.tbPgSurvey.TabIndex = 1;
             this.tbPgSurvey.Text = "Survey Polygon";
             this.tbPgSurvey.UseVisualStyleBackColor = true;
+            // 
+            // nudPathAngle
+            // 
+            this.nudPathAngle.Location = new System.Drawing.Point(6, 215);
+            this.nudPathAngle.Maximum = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            this.nudPathAngle.Minimum = new decimal(new int[] {
+            90,
+            0,
+            0,
+            -2147483648});
+            this.nudPathAngle.Name = "nudPathAngle";
+            this.nudPathAngle.Size = new System.Drawing.Size(115, 20);
+            this.nudPathAngle.TabIndex = 22;
+            this.nudPathAngle.ValueChanged += new System.EventHandler(this.nudPathAngle_ValueChanged);
             // 
             // label5
             // 
@@ -493,8 +484,7 @@
             // 
             this.menuStrip.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1087, 24);
@@ -505,9 +495,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
-            this.openToolStripMenuItem,
             this.toolStripMenuItem2,
-            this.saveToolStripMenuItem,
             this.exportToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -519,22 +507,10 @@
             this.newToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.openToolStripMenuItem.Text = "Open";
-            // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(173, 6);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.saveToolStripMenuItem.Text = "Save..";
             // 
             // exportToolStripMenuItem
             // 
@@ -542,12 +518,6 @@
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.exportToolStripMenuItem.Text = "Export Flight Path...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
             // 
             // statusStrip
             // 
@@ -572,23 +542,26 @@
             this.statLng.Size = new System.Drawing.Size(37, 17);
             this.statLng.Text = "Long:";
             // 
-            // nudPathAngle
+            // WaypointNumber
             // 
-            this.nudPathAngle.Location = new System.Drawing.Point(6, 215);
-            this.nudPathAngle.Maximum = new decimal(new int[] {
-            90,
-            0,
-            0,
-            0});
-            this.nudPathAngle.Minimum = new decimal(new int[] {
-            90,
-            0,
-            0,
-            -2147483648});
-            this.nudPathAngle.Name = "nudPathAngle";
-            this.nudPathAngle.Size = new System.Drawing.Size(115, 20);
-            this.nudPathAngle.TabIndex = 22;
-            this.nudPathAngle.ValueChanged += new System.EventHandler(this.nudPathAngle_ValueChanged);
+            this.WaypointNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.WaypointNumber.HeaderText = "No.";
+            this.WaypointNumber.Name = "WaypointNumber";
+            this.WaypointNumber.ReadOnly = true;
+            this.WaypointNumber.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.WaypointNumber.Width = 49;
+            // 
+            // Lat
+            // 
+            this.Lat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Lat.HeaderText = "Lat";
+            this.Lat.Name = "Lat";
+            // 
+            // Lng
+            // 
+            this.Lng.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Lng.HeaderText = "Long";
+            this.Lng.Name = "Lng";
             // 
             // frmMain
             // 
@@ -613,13 +586,13 @@
             this.tbPgFlighPath.PerformLayout();
             this.tbPgSurvey.ResumeLayout(false);
             this.tbPgSurvey.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPathAngle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPointSpacing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPathSpacing)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPathAngle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -633,11 +606,8 @@
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statLat;
         private System.Windows.Forms.ToolStripStatusLabel statLng;
@@ -659,9 +629,6 @@
         private System.Windows.Forms.Button btnPolyClear;
         private System.Windows.Forms.TextBox txbxLngPoly;
         private System.Windows.Forms.TextBox txbxLatPoly;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WaypointNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lat;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lng;
         private System.Windows.Forms.TabControl tbPathControls;
         private System.Windows.Forms.TabPage tbPgFlighPath;
         private System.Windows.Forms.TabPage tbPgSurvey;
@@ -671,6 +638,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown nudPathAngle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WaypointNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Lat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Lng;
 
 
 
