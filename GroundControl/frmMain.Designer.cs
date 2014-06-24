@@ -69,6 +69,8 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statLat = new System.Windows.Forms.ToolStripStatusLabel();
             this.statLng = new System.Windows.Forms.ToolStripStatusLabel();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tutorialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).BeginInit();
             this.grBxPoints.SuspendLayout();
@@ -508,7 +510,8 @@
             // 
             this.menuStrip.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1087, 24);
@@ -566,6 +569,20 @@
             this.statLng.Name = "statLng";
             this.statLng.Size = new System.Drawing.Size(37, 17);
             this.statLng.Text = "Long:";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tutorialsToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // tutorialsToolStripMenuItem
+            // 
+            this.tutorialsToolStripMenuItem.Name = "tutorialsToolStripMenuItem";
+            this.tutorialsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tutorialsToolStripMenuItem.Text = "Tutorials";
             // 
             // frmMain
             // 
@@ -645,6 +662,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown nudPathAngle;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tutorialsToolStripMenuItem;
 
 
 

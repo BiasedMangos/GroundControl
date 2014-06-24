@@ -56,13 +56,13 @@ namespace GroundControl
                     {
                         fillSegment(pStart, pEnd, dPointSpacing, lPointsPath);
                         //lPointsPath.Add(pStart);
-                        lPointsPath.Add(pEnd);
+                        //lPointsPath.Add(pEnd);
                     }
                     else
                     {
                         fillSegment(pEnd, pStart, dPointSpacing, lPointsPath);
                         //lPointsPath.Add(pEnd);
-                        lPointsPath.Add(pStart);
+                        //lPointsPath.Add(pStart);
                     }
                 }
             }
@@ -144,13 +144,20 @@ namespace GroundControl
         public void fillSegment( PointLatLng pStart, PointLatLng pEnd, double dPointSpacing, List<PointLatLng> lPointsPath)
         {
             double dAngle = Math.Atan2(pEnd.Lat - pStart.Lat, pEnd.Lng - pStart.Lng);
-
             double dPointOffsetLat = dPointSpacing * Math.Sin(dAngle);
             double dPointOffsetLng = dPointSpacing * Math.Cos(dAngle);
-            for (int i = 0; i < 10; i++)
+
+            PointLatLng pNew = pStart;
+
+            int i = 0;
+            while (Geometry.PointOnLine(pNew, pStart, pEnd))
             {
-                lPointsPath.Add(new PointLatLng(pStart.Lat + i * dPointOffsetLat, pStart.Lng + i * dPointOffsetLng));
-            }
+                lPointsPath.Add(pNew);
+                i++;              
+                pNew = new PointLatLng(pStart.Lat + (i) * dPointOffsetLat, pStart.Lng + (i) * dPointOffsetLng);
+            } 
+
+            lPointsPath.Add(pEnd);
         }
 
 

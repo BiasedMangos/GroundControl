@@ -108,7 +108,7 @@ namespace GroundControl
 
                 //the vector cross product is applied to the vectors
                 //the cross product usually creates another vector perpendicular to both initial vectors
-                //its magnitude also happens represents the area of the parallelogram enclosed by the vectors
+                //its magnitude also happens to represent the area of the parallelogram enclosed by the vectors
                 dArea += v1x * v2y - v1y * v2x;
             }
             return dArea/2;
@@ -117,6 +117,9 @@ namespace GroundControl
 
         public bool PointOnLine(PointLatLng pointP, PointLatLng pointL1, PointLatLng pointL2)
         {
+            //used as a test for if an intersection point is on a line
+            //actually returns wether or not the point is within the rectangle created by the line
+
             double dFudge = -0.000001;       // This is used to avoid rounding errors causing false positives
             double dLngMax = Math.Max(pointL1.Lng, pointL2.Lng) - dFudge;
             double dLngMin = Math.Min(pointL1.Lng, pointL2.Lng) + dFudge;
@@ -171,6 +174,8 @@ namespace GroundControl
 
         public bool LineIntersectPoly(List<PointLatLng> lPoints, PointLatLng point1, PointLatLng point2)
         {
+            //loops through all the lines in a polygon, 
+            //checking if the line to be tested intersects with any of them
             PointLatLng pointInt = new PointLatLng();
             for (int i = 0; i < lPoints.Count; i++)
             {
@@ -183,9 +188,9 @@ namespace GroundControl
         }
         public RectLatLng GetBoundingBox(List<PointLatLng> lPoints)
         {
+            //returns a rectangle that represents the X and Y (LLng and Lat) limits of a set of points
             double dYMax = lPoints[0].Lat, dYMin = lPoints[0].Lat, dXMax = lPoints[0].Lng, dXMin = lPoints[0].Lng;
             
-
             foreach (PointLatLng point in lPoints)
             {
                 dYMax = Math.Max(dYMax, point.Lat);
