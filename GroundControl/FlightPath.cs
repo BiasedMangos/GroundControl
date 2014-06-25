@@ -54,13 +54,13 @@ namespace GroundControl
                 {
                     if ((i % 2) == 0) //  reverses direction of every second pass of the flight path to create a zig zag pattern
                     {
-                        fillSegment(pStart, pEnd, dPointSpacing, lPointsPath);
+                        fillSegment(pStart, pEnd, dPointSpacing, lPointsPath, lPointsPoly);
                         //lPointsPath.Add(pStart);
                         //lPointsPath.Add(pEnd);
                     }
                     else
                     {
-                        fillSegment(pEnd, pStart, dPointSpacing, lPointsPath);
+                        fillSegment(pEnd, pStart, dPointSpacing, lPointsPath, lPointsPoly);
                         //lPointsPath.Add(pEnd);
                         //lPointsPath.Add(pStart);
                     }
@@ -82,6 +82,8 @@ namespace GroundControl
         }
         public int ClipLineToPoly(List<PointLatLng> lPoints, ref PointLatLng point1, ref PointLatLng point2)
         {
+            // takes a line segment and a polygon
+            //returns that line segment with its ends moved in so they are lying on the edge of the polygon
             PointLatLng pointInt = new PointLatLng();
             List<PointLatLng> lIntersections = new List<PointLatLng>();
             for (int i = 0; i < lPoints.Count; i++)
@@ -125,6 +127,8 @@ namespace GroundControl
 
         public double getDistanceFromLatLonInKm(double dLat1, double dLon1, double dLat2, double dLon2) 
         {
+            //converts two lat long coordinates into a distance in km 
+            //using an approximation of the earths surface as a sphere
             var R = 6367444; // average Radius of the earth in metres, will give a close enough approximation for our purpose
             var dLat = deg2rad(dLat2 - dLat1);  // deg2rad below
             var dLon = deg2rad(dLon2 - dLon1); 
@@ -141,8 +145,10 @@ namespace GroundControl
             return dDeg * (Math.PI/180);
         }
 
-        public void fillSegment( PointLatLng pStart, PointLatLng pEnd, double dPointSpacing, List<PointLatLng> lPointsPath)
+        public void fillSegment( PointLatLng pStart, PointLatLng pEnd, double dPointSpacing, List<PointLatLng> lPointsPath, List<PointLatLng> lPointsPoly)
         {
+            //takes a line segment (two points)
+            //and fills in the line with points of a certain spacing (dPointSpacing)
             double dAngle = Math.Atan2(pEnd.Lat - pStart.Lat, pEnd.Lng - pStart.Lng);
             double dPointOffsetLat = dPointSpacing * Math.Sin(dAngle);
             double dPointOffsetLng = dPointSpacing * Math.Cos(dAngle);
@@ -152,7 +158,8 @@ namespace GroundControl
             int i = 0;
             while (Geometry.PointOnLine(pNew, pStart, pEnd))
             {
-                lPointsPath.Add(pNew);
+                //if (Geometry.PointInPoly(pNew, lPointsPoly))
+                    lPointsPath.Add(pNew);
                 i++;              
                 pNew = new PointLatLng(pStart.Lat + (i) * dPointOffsetLat, pStart.Lng + (i) * dPointOffsetLng);
             } 
@@ -189,7 +196,7 @@ namespace GroundControl
         }
         public void ExportToCSV(List<PointLatLng> lPoints, string sFile)
         {
-
+            //placeholder for future implementation
         }
     }
 }

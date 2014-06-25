@@ -15,6 +15,8 @@ namespace GroundControl
     {
         public double ccw(double p1x, double p1y, double p2x, double p2y, double p3x, double p3y)
         {
+            //uses similar algorithm to calculate area function (cross product)
+            //as cross product will return positive direction if 
             return (p2x - p1x) * (p3y - p1y) - (p2y - p1y) * (p3x - p1x);
         }
 
@@ -39,6 +41,24 @@ namespace GroundControl
             return Math.PI - (dSlope23 - dSlope12);
         }
 
+        public bool PointInPoly(PointLatLng pTest, List<PointLatLng> lPoints)
+        {
+            // Experimental check this danielslslsllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+            int i1;
+            int i2;
+            double dNetAngle = 0;
+
+            for (int i = 0; i < lPoints.Count; i++)
+            {
+                i1 = i;
+                i2 = (i + 1) % lPoints.Count;
+
+                dNetAngle += GetAngle(lPoints[i1].Lng, lPoints[i1].Lat, pTest.Lng, pTest.Lat, lPoints[i2].Lng, lPoints[i2].Lat);
+            }
+
+            return (dNetAngle != 0);
+
+        }
         public void ConvexHull(List<PointLatLng> lPoints)
         {
             //any polygons drawn willautomatically be edited so that they progress in an anticlockwise direction

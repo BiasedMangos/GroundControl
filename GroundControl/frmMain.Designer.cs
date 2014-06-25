@@ -66,11 +66,11 @@
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tutorialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statLat = new System.Windows.Forms.ToolStripStatusLabel();
             this.statLng = new System.Windows.Forms.ToolStripStatusLabel();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tutorialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).BeginInit();
             this.grBxPoints.SuspendLayout();
@@ -242,7 +242,7 @@
             // lblLatPath
             // 
             this.lblLatPath.AutoSize = true;
-            this.lblLatPath.Location = new System.Drawing.Point(6, 32);
+            this.lblLatPath.Location = new System.Drawing.Point(6, 45);
             this.lblLatPath.Name = "lblLatPath";
             this.lblLatPath.Size = new System.Drawing.Size(25, 13);
             this.lblLatPath.TabIndex = 5;
@@ -251,7 +251,7 @@
             // btnAddPathPoint
             // 
             this.btnAddPathPoint.Enabled = false;
-            this.btnAddPathPoint.Location = new System.Drawing.Point(6, 74);
+            this.btnAddPathPoint.Location = new System.Drawing.Point(6, 87);
             this.btnAddPathPoint.Name = "btnAddPathPoint";
             this.btnAddPathPoint.Size = new System.Drawing.Size(75, 23);
             this.btnAddPathPoint.TabIndex = 7;
@@ -272,7 +272,7 @@
             // lblLLngPath
             // 
             this.lblLLngPath.AutoSize = true;
-            this.lblLLngPath.Location = new System.Drawing.Point(109, 32);
+            this.lblLLngPath.Location = new System.Drawing.Point(109, 45);
             this.lblLLngPath.Name = "lblLLngPath";
             this.lblLLngPath.Size = new System.Drawing.Size(34, 13);
             this.lblLLngPath.TabIndex = 6;
@@ -302,7 +302,7 @@
             // txbxLngPath
             // 
             this.txbxLngPath.Enabled = false;
-            this.txbxLngPath.Location = new System.Drawing.Point(112, 48);
+            this.txbxLngPath.Location = new System.Drawing.Point(112, 61);
             this.txbxLngPath.Name = "txbxLngPath";
             this.txbxLngPath.Size = new System.Drawing.Size(100, 20);
             this.txbxLngPath.TabIndex = 4;
@@ -310,7 +310,7 @@
             // txbxLatPath
             // 
             this.txbxLatPath.Enabled = false;
-            this.txbxLatPath.Location = new System.Drawing.Point(6, 48);
+            this.txbxLatPath.Location = new System.Drawing.Point(6, 61);
             this.txbxLatPath.Name = "txbxLatPath";
             this.txbxLatPath.Size = new System.Drawing.Size(100, 20);
             this.txbxLatPath.TabIndex = 3;
@@ -341,7 +341,7 @@
             // 
             // nudPathAngle
             // 
-            this.nudPathAngle.Location = new System.Drawing.Point(6, 215);
+            this.nudPathAngle.Location = new System.Drawing.Point(9, 241);
             this.nudPathAngle.Maximum = new decimal(new int[] {
             90,
             0,
@@ -360,7 +360,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 199);
+            this.label5.Location = new System.Drawing.Point(9, 225);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 13);
             this.label5.TabIndex = 21;
@@ -369,7 +369,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(125, 126);
+            this.label4.Location = new System.Drawing.Point(128, 152);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 13);
             this.label4.TabIndex = 19;
@@ -378,7 +378,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 126);
+            this.label3.Location = new System.Drawing.Point(6, 152);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 18;
@@ -386,7 +386,7 @@
             // 
             // nudPointSpacing
             // 
-            this.nudPointSpacing.Location = new System.Drawing.Point(128, 142);
+            this.nudPointSpacing.Location = new System.Drawing.Point(131, 168);
             this.nudPointSpacing.Maximum = new decimal(new int[] {
             200,
             0,
@@ -409,7 +409,7 @@
             // 
             // nudPathSpacing
             // 
-            this.nudPathSpacing.Location = new System.Drawing.Point(6, 142);
+            this.nudPathSpacing.Location = new System.Drawing.Point(9, 168);
             this.nudPathSpacing.Maximum = new decimal(new int[] {
             200,
             0,
@@ -433,7 +433,7 @@
             // btnAddPolyPoint
             // 
             this.btnAddPolyPoint.Enabled = false;
-            this.btnAddPolyPoint.Location = new System.Drawing.Point(6, 74);
+            this.btnAddPolyPoint.Location = new System.Drawing.Point(6, 87);
             this.btnAddPolyPoint.Name = "btnAddPolyPoint";
             this.btnAddPolyPoint.Size = new System.Drawing.Size(75, 23);
             this.btnAddPolyPoint.TabIndex = 15;
@@ -454,7 +454,7 @@
             // txbxLatPoly
             // 
             this.txbxLatPoly.Enabled = false;
-            this.txbxLatPoly.Location = new System.Drawing.Point(6, 48);
+            this.txbxLatPoly.Location = new System.Drawing.Point(6, 61);
             this.txbxLatPoly.Name = "txbxLatPoly";
             this.txbxLatPoly.Size = new System.Drawing.Size(100, 20);
             this.txbxLatPoly.TabIndex = 11;
@@ -462,7 +462,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(109, 32);
+            this.label1.Location = new System.Drawing.Point(109, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 14;
@@ -471,7 +471,7 @@
             // txbxLngPoly
             // 
             this.txbxLngPoly.Enabled = false;
-            this.txbxLngPoly.Location = new System.Drawing.Point(112, 48);
+            this.txbxLngPoly.Location = new System.Drawing.Point(112, 61);
             this.txbxLngPoly.Name = "txbxLngPoly";
             this.txbxLngPoly.Size = new System.Drawing.Size(100, 20);
             this.txbxLngPoly.TabIndex = 12;
@@ -500,7 +500,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 32);
+            this.label2.Location = new System.Drawing.Point(6, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(25, 13);
             this.label2.TabIndex = 13;
@@ -547,6 +547,20 @@
             this.exportToolStripMenuItem.Text = "Export Flight Path...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tutorialsToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // tutorialsToolStripMenuItem
+            // 
+            this.tutorialsToolStripMenuItem.Name = "tutorialsToolStripMenuItem";
+            this.tutorialsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tutorialsToolStripMenuItem.Text = "Tutorials";
+            // 
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -569,20 +583,6 @@
             this.statLng.Name = "statLng";
             this.statLng.Size = new System.Drawing.Size(37, 17);
             this.statLng.Text = "Long:";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tutorialsToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // tutorialsToolStripMenuItem
-            // 
-            this.tutorialsToolStripMenuItem.Name = "tutorialsToolStripMenuItem";
-            this.tutorialsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.tutorialsToolStripMenuItem.Text = "Tutorials";
             // 
             // frmMain
             // 
