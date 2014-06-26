@@ -67,10 +67,11 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tutorialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statLat = new System.Windows.Forms.ToolStripStatusLabel();
             this.statLng = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tutorialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trBarZoom)).BeginInit();
             this.grBxPoints.SuspendLayout();
@@ -105,8 +106,8 @@
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 3;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 125F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.Size = new System.Drawing.Size(1087, 690);
             this.tlpMain.TabIndex = 0;
@@ -136,7 +137,7 @@
             this.gMapMain.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapMain.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapMain.ShowTileGridLines = false;
-            this.gMapMain.Size = new System.Drawing.Size(513, 684);
+            this.gMapMain.Size = new System.Drawing.Size(510, 684);
             this.gMapMain.TabIndex = 0;
             this.gMapMain.Zoom = 0D;
             this.gMapMain.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.gMapMain_OnMapZoomChanged);
@@ -146,7 +147,7 @@
             // trBarZoom
             // 
             this.trBarZoom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trBarZoom.Location = new System.Drawing.Point(785, 3);
+            this.trBarZoom.Location = new System.Drawing.Point(782, 3);
             this.trBarZoom.Name = "trBarZoom";
             this.trBarZoom.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tlpMain.SetRowSpan(this.trBarZoom, 4);
@@ -158,10 +159,10 @@
             // 
             this.grBxPoints.Controls.Add(this.dGViewWaypoints);
             this.grBxPoints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grBxPoints.Location = new System.Drawing.Point(823, 3);
+            this.grBxPoints.Location = new System.Drawing.Point(820, 3);
             this.grBxPoints.Name = "grBxPoints";
             this.tlpMain.SetRowSpan(this.grBxPoints, 4);
-            this.grBxPoints.Size = new System.Drawing.Size(261, 684);
+            this.grBxPoints.Size = new System.Drawing.Size(264, 684);
             this.grBxPoints.TabIndex = 4;
             this.grBxPoints.TabStop = false;
             this.grBxPoints.Text = "Points";
@@ -183,7 +184,7 @@
             this.dGViewWaypoints.ReadOnly = true;
             this.dGViewWaypoints.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dGViewWaypoints.RowHeadersVisible = false;
-            this.dGViewWaypoints.Size = new System.Drawing.Size(255, 665);
+            this.dGViewWaypoints.Size = new System.Drawing.Size(258, 665);
             this.dGViewWaypoints.TabIndex = 0;
             // 
             // WaypointNumber
@@ -218,7 +219,7 @@
             this.tbPathControls.Name = "tbPathControls";
             this.tlpMain.SetRowSpan(this.tbPathControls, 3);
             this.tbPathControls.SelectedIndex = 0;
-            this.tbPathControls.Size = new System.Drawing.Size(257, 494);
+            this.tbPathControls.Size = new System.Drawing.Size(257, 419);
             this.tbPathControls.TabIndex = 6;
             // 
             // tbPgFlighPath
@@ -334,7 +335,7 @@
             this.tbPgSurvey.Location = new System.Drawing.Point(4, 22);
             this.tbPgSurvey.Name = "tbPgSurvey";
             this.tbPgSurvey.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPgSurvey.Size = new System.Drawing.Size(249, 468);
+            this.tbPgSurvey.Size = new System.Drawing.Size(249, 393);
             this.tbPgSurvey.TabIndex = 1;
             this.tbPgSurvey.Text = "Survey Polygon";
             this.tbPgSurvey.UseVisualStyleBackColor = true;
@@ -353,40 +354,40 @@
             0,
             -2147483648});
             this.nudPathAngle.Name = "nudPathAngle";
-            this.nudPathAngle.Size = new System.Drawing.Size(115, 20);
+            this.nudPathAngle.Size = new System.Drawing.Size(114, 20);
             this.nudPathAngle.TabIndex = 22;
             this.nudPathAngle.ValueChanged += new System.EventHandler(this.nudPathAngle_ValueChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 225);
+            this.label5.Location = new System.Drawing.Point(6, 225);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 13);
+            this.label5.Size = new System.Drawing.Size(106, 13);
             this.label5.TabIndex = 21;
-            this.label5.Text = "Path Angle";
+            this.label5.Text = "Path Angle (degrees)";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(128, 152);
+            this.label4.Location = new System.Drawing.Point(126, 152);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 13);
+            this.label4.Size = new System.Drawing.Size(90, 13);
             this.label4.TabIndex = 19;
-            this.label4.Text = "Point Spacing";
+            this.label4.Text = "Point Spacing (m)";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 152);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 18;
-            this.label3.Text = "Path Spacing";
+            this.label3.Text = "Path Spacing (m)";
             // 
             // nudPointSpacing
             // 
-            this.nudPointSpacing.Location = new System.Drawing.Point(131, 168);
+            this.nudPointSpacing.Location = new System.Drawing.Point(129, 168);
             this.nudPointSpacing.Maximum = new decimal(new int[] {
             200,
             0,
@@ -398,7 +399,7 @@
             0,
             0});
             this.nudPointSpacing.Name = "nudPointSpacing";
-            this.nudPointSpacing.Size = new System.Drawing.Size(115, 20);
+            this.nudPointSpacing.Size = new System.Drawing.Size(114, 20);
             this.nudPointSpacing.TabIndex = 17;
             this.nudPointSpacing.Value = new decimal(new int[] {
             25,
@@ -421,7 +422,7 @@
             0,
             0});
             this.nudPathSpacing.Name = "nudPathSpacing";
-            this.nudPathSpacing.Size = new System.Drawing.Size(115, 20);
+            this.nudPathSpacing.Size = new System.Drawing.Size(114, 20);
             this.nudPathSpacing.TabIndex = 16;
             this.nudPathSpacing.Value = new decimal(new int[] {
             50,
@@ -550,16 +551,18 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.userManualToolStripMenuItem,
             this.tutorialsToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // tutorialsToolStripMenuItem
+            // userManualToolStripMenuItem
             // 
-            this.tutorialsToolStripMenuItem.Name = "tutorialsToolStripMenuItem";
-            this.tutorialsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.tutorialsToolStripMenuItem.Text = "Tutorials";
+            this.userManualToolStripMenuItem.Name = "userManualToolStripMenuItem";
+            this.userManualToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.userManualToolStripMenuItem.Text = "User Manual";
+            this.userManualToolStripMenuItem.Click += new System.EventHandler(this.userManualToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -583,6 +586,13 @@
             this.statLng.Name = "statLng";
             this.statLng.Size = new System.Drawing.Size(37, 17);
             this.statLng.Text = "Long:";
+            // 
+            // tutorialsToolStripMenuItem
+            // 
+            this.tutorialsToolStripMenuItem.Name = "tutorialsToolStripMenuItem";
+            this.tutorialsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tutorialsToolStripMenuItem.Text = "Tutorials";
+            this.tutorialsToolStripMenuItem.Click += new System.EventHandler(this.tutorialsToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -663,6 +673,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown nudPathAngle;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem userManualToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tutorialsToolStripMenuItem;
 
 

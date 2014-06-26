@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
+using System.IO;
+using System.Diagnostics;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.Projections;
@@ -354,6 +356,23 @@ namespace GroundControl
         private void nudPathAngle_ValueChanged(object sender, EventArgs e)
         {
             GenerateSurvey();
+        }
+
+        private void userManualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //displays the user manual in the users default browser
+            string locationToSavePdf = Path.Combine(Path.GetTempPath(), "UserManualPDF.pdf");  // select other location if you want
+            File.WriteAllBytes(locationToSavePdf, Properties.Resources.UserManualPDF);    // write the file from the resources to the location you want
+            Process.Start(locationToSavePdf); 
+
+        }
+
+        private void tutorialsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //displays the Tutorials in the users default browser
+            string locationToSavePdf = Path.Combine(Path.GetTempPath(), "TutorialPDF.pdf");  // select other location if you want
+            File.WriteAllBytes(locationToSavePdf, Properties.Resources.TutorialPDF);    // write the file from the resources to the location you want
+            Process.Start(locationToSavePdf); 
         }
     }
 }

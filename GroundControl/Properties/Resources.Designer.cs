@@ -59,5 +59,25 @@ namespace GroundControl.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] TutorialPDF {
+            get {
+                object obj = ResourceManager.GetObject("TutorialPDF", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] UserManualPDF {
+            get {
+                object obj = ResourceManager.GetObject("UserManualPDF", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
